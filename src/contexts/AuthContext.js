@@ -1,41 +1,61 @@
-import React, { createContext } from 'react'
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import React, { createContext, useState } from 'react'
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, signInWithRedirect, GoogleAuthProvider } from 'firebase/auth'
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from "../firebase-config"
-import { toast } from "react-toastify";
+import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import { useNavigate } from 'react-router-dom';
+
 
 const AuthContext = createContext()
 
-const onGoogleClick = async () => {
-    try {
-        const result = await signInWithPopup(auth, provider)
-        const user = result.user
-        const auth = getAuth()
-        const provider = new GoogleAuthProvider()
-
-        // Check for user
-        const docRef = doc(db, 'users', user.uid)
-        const docSnap = await getDoc(docRef)
-
-        // If user, doesn't exist, create user
-        if (!docSnap.exists()) {
-            await setDoc(doc(db, 'users', user.uid), {
-                name: user.displayName,
-                email: user.email,
-                timestamp: serverTimestamp(),
-            })
-        }
-        toast.success("Logged in with Google successfully")
-        // navigate('/')
-    } catch (error) {
-        toast.error('Could not authorize with Google')
-    }
-}
-
 export const AuthContextProvider = ({children}) => {
+    const auth = getAuth()
+    const [userEmail, setUserEmail] = useState("")
+    const [userPassword, setUserPassword] = useState("")
+    
+    const googleRedirect = async () => {
+    
+        console.log("clicked");
+        try {
+            const provider = new GoogleAuthProvider()
+            const result = await signInWithRedirect(auth, provider);
+            const user = result.user
+            console.log(user);
+            toast.success("log in via redirect is successful")
+        } catch (error) {
+            toast.error(("log in via redirect is unsuccessful"))
+        }
+    }
+    
+    const signUpWithEmail = () => {
+        console.log("signing up with email");
+        const auth = getAuth();
+
+        if(userPassword.length < 6){
+            console.log("toasting in progress");
+            toast.error("too short")}
+        else{
+        createUserWithEmailAndPassword(auth, userEmail, userPassword)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log(user);
+            toast("sign up successful")
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+        });}
+    }
+
     return(
         <AuthContext.Provider value={{
-            onGoogleClick
+            googleRedirect,
+            signUpWithEmail,
+            setUserEmail,
+            setUserPassword
         }}>
             {children}
         </AuthContext.Provider>

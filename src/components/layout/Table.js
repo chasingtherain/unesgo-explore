@@ -18,7 +18,7 @@ function Table() {
                 <tr>
                 <th>
                     <label>
-                    <input type="checkbox" className="checkbox" disabled="true" />
+                    <input type="checkbox" className="checkbox" disabled={true} />
                     </label>
                 </th>
                 <th>Site Name</th>

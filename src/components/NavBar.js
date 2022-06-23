@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import AuthContext from '../contexts/AuthContext'
 
 function NavBar() {
-    const {onGoogleClick} = useContext(AuthContext)
+    // const {onGoogleClick} = useContext(AuthContext)
 
     return (
     <div>
@@ -15,8 +15,8 @@ function NavBar() {
                 </button>
             </div>
             <div className="navbar-end">
-                <button className ="btn text-lg px-8 mr-4" onClick={onGoogleClick}>
-                    Login
+                <button className ="btn text-xs px-2">
+                    <Link to="/sign-in">Login / Sign Up</Link>
                 </button>
             </div>
         </div>

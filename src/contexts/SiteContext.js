@@ -3,10 +3,10 @@ import unescoSiteData from '../unescoSiteData'
 
 const SiteContext = createContext()
 
-const provinceData = ["All","Anhui","Beijing",  "Chongqing",  "Fujian",  "Gansu",  "Guangdong",  "Guangxi",  "Guizhou",  "Hainan",  "Hebei",  "Heilongjiang",  "Henan",  "Hong Kong",  "Hubei",  "Hunan",  "Inner Mongolia",  "Jiangsu",  "Jiangxi",  "Jilin",  "Liaoning",  "Macau",  "Ningxia",  "Qinghai",  "Shaanxi",  "Shandong",  "Shanghai",  "Shanxi",  "Sichuan",  "Tianjin","Tibet",  "Xinjiang","Yunnan","Zhejiang"]
+const provinceData = ["All Province / Region","Anhui","Beijing",  "Chongqing",  "Fujian",  "Gansu",  "Guangdong",  "Guangxi",  "Guizhou",  "Hainan",  "Hebei",  "Heilongjiang",  "Henan",  "Hong Kong",  "Hubei",  "Hunan",  "Inner Mongolia",  "Jiangsu",  "Jiangxi",  "Jilin",  "Liaoning",  "Macau",  "Ningxia",  "Qinghai",  "Shaanxi",  "Shandong",  "Shanghai",  "Shanxi",  "Sichuan",  "Tianjin","Tibet",  "Xinjiang","Yunnan","Zhejiang"]
 
 export const SiteContextProvider = ({children}) => {
-    const [selectedProvince, setSelectedProvince] = useState("All")
+    const [selectedProvince, setSelectedProvince] = useState("All Province / Region")
     const [provinceSite, setProvinceSite] = useState((unescoSiteData.map(site => site)))
     const [visitedSite, setVisitedSite] = useState([])
 
@@ -15,7 +15,7 @@ export const SiteContextProvider = ({children}) => {
     const handleSelectProvince = (event) => {
         setSelectedProvince(event.target.value);
         
-        if(event.target.value === "All"){setProvinceSite(unescoSiteData.map(site => site))}
+        if(event.target.value === "All Province / Region"){setProvinceSite(unescoSiteData.map(site => site))}
         else{ setProvinceSite(unescoSiteData.filter(object => object["admin_region"] === event.target.value))}
       }
     

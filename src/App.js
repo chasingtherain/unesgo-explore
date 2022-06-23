@@ -6,6 +6,10 @@ import {AuthContextProvider} from "./contexts/AuthContext";
 import CountrySiteList from "./components/CountrySiteList";
 import { SiteContextProvider } from "./contexts/SiteContext";
 import Footer from "./components/Footer";
+import SignInPage from "./pages/SignInPage";
+import ResetPassword from "./pages/ResetPassword";
+import SignUpPage from "./pages/SignUpPage";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -16,11 +20,15 @@ function App() {
             <NavBar/> 
             <Routes>
               <Route exact path = '/' element={<LandingPage/>}/>
+              <Route path = '/sign-in' element={<SignInPage/>}/>
+              <Route path = '/sign-up' element={<SignUpPage/>}/>
+              <Route path = '/forgot-password' element={<ResetPassword/>}/>
               <Route path = '/*' element={<NotFound/>}/>
               <Route path = "/site" element={<CountrySiteList/>}/>
             </Routes>
+            <Footer/>
           </Router>
-          <Footer/>
+        <ToastContainer/>
         </AuthContextProvider>
       </SiteContextProvider>
     </div>
