@@ -1,12 +1,51 @@
-import unescoSiteData from "../../unescoSiteData"
 import TableRow from "./TableRow"
 import SiteContext from "../../contexts/SiteContext"
-import { useContext, useState } from "react"
+import AuthContext from "../../contexts/AuthContext"
+import { useContext, useEffect } from "react"
+import { doc,getDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../../firebase-config';
 
 function Table() {
     const {provinceSite, selectedProvince} = useContext(SiteContext)
-    // console.log(unescoSiteData)
-    // console.log(provinceSite);
+    const {currentUser} = useContext(AuthContext)
+    const {visitedSite, setVisitedState} = useContext(SiteContext)
+
+    // fetch user progress  
+    
+
+    useEffect(() => {
+        const getDoc = async () => {
+        const docRef = doc(db, "users", currentUser.uid);
+        const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            }
+         }
+         getDoc()
+        }, [currentUser])
+
+    if(currentUser){
+        console.log("user exists");
+        getDoc()
+    }
+
+    // update user progress
+    useEffect(() => {
+        if(currentUser){
+            // update db whenever visitedSite is updated
+            const docRef = doc(db, "users", currentUser.uid);        
+            // To update progress
+            updateDoc(docRef, {
+                "progress": visitedSite
+            });
+            console.log("user logged in, new data added!");
+        }
+        else console.log("can't add data, not logged in");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[visitedSite])
 
 
     return (

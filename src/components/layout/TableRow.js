@@ -1,14 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect} from 'react'
 import SiteContext from '../../contexts/SiteContext';
+import AuthContext from '../../contexts/AuthContext';
 
 function TableRow({siteName, siteProvince}) {
     const {visitedSite, removeSiteFromList, setVisitedSite} = useContext(SiteContext)
-
     const handleCheck = (event) => {
-        const selectedBox = document.getElementById(event.target.id)
-        console.log(selectedBox);
-
-        console.log(event.target.id);
         if(visitedSite.includes(event.target.id)) {
             removeSiteFromList(event.target.id)
         }
@@ -16,7 +12,7 @@ function TableRow({siteName, siteProvince}) {
             setVisitedSite(visitedSite.concat(event.target.id))
         }
     }
-
+    
     const checkedStatus = (site) => {
         if(visitedSite.includes(site)) return "checked"
         return ""

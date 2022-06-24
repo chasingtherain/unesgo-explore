@@ -12,7 +12,6 @@ function Stats() {
   const countLocalSitesVisited = provinceSite.filter(site => visitedSite.includes(site.name)).length
   const remainingLocalSites = totalNumOfLocalSites-countLocalSitesVisited
 
-
   return (
     <div className="stats shadow flex flex-end mb-6 border-2 border-sky-500 mr-2 sm: mx-5">        
         <div className="stat">

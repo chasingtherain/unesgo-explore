@@ -1,5 +1,6 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import unescoSiteData from '../unescoSiteData'
+// import AuthContext from './AuthContext'
 
 const SiteContext = createContext()
 
@@ -10,8 +11,7 @@ export const SiteContextProvider = ({children}) => {
     const [provinceSite, setProvinceSite] = useState((unescoSiteData.map(site => site)))
     const [visitedSite, setVisitedSite] = useState([])
 
-
-
+        
     const handleSelectProvince = (event) => {
         setSelectedProvince(event.target.value);
         
