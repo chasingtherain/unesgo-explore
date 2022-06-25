@@ -2,7 +2,6 @@ import NavBar from "./components/NavBar";
 import LandingPage from "./pages/LandingPage";
 import NotFound from "./pages/NotFound";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import {AuthContextProvider} from "./contexts/AuthContext";
 import CountrySiteList from "./components/CountrySiteList";
 import { SiteContextProvider } from "./contexts/SiteContext";
 import Footer from "./components/Footer";
@@ -15,7 +14,6 @@ function App() {
   return (
     <div>
       <SiteContextProvider>
-        <AuthContextProvider>
           <Router>
             <NavBar/> 
             <Routes>
@@ -29,7 +27,6 @@ function App() {
             <Footer/>
           </Router>
         <ToastContainer/>
-        </AuthContextProvider>
       </SiteContextProvider>
     </div>
   );

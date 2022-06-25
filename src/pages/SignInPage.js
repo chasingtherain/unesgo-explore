@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import AuthContext from '../contexts/AuthContext'
 import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import SiteContext from '../contexts/SiteContext';
 
 function SignInPage() {
     const auth = getAuth()
     const navigate = useNavigate()
-    const {setCurrentUser, googleRedirect} = useContext(AuthContext)
+    const {googleRedirect, setCurrentUser} = useContext(SiteContext)
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
 

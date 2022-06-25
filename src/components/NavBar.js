@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 // import { useLocation, useNavigate } from 'react-router-dom'
-import AuthContext from '../contexts/AuthContext'
+import SiteContext from '../contexts/SiteContext'
 
 function NavBar() {
-    const {currentUser, signOutCurrentUser} = useContext(AuthContext)
+    const {currentUser, signOutCurrentUser} = useContext(SiteContext)
+
 
     return (
     <div>

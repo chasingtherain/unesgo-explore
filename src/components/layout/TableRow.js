@@ -1,18 +1,21 @@
-import React, { useContext, useEffect} from 'react'
+import React, { useContext} from 'react'
 import SiteContext from '../../contexts/SiteContext';
-import AuthContext from '../../contexts/AuthContext';
+import { doc,updateDoc } from 'firebase/firestore';
+import { db } from '../../firebase-config';
 
 function TableRow({siteName, siteProvince}) {
-    const {visitedSite, removeSiteFromList, setVisitedSite} = useContext(SiteContext)
+    const {currentUser,visitedSite, removeSiteFromList, setVisitedSite} = useContext(SiteContext)
+
     const handleCheck = (event) => {
         if(visitedSite.includes(event.target.id)) {
             removeSiteFromList(event.target.id)
         }
         else{
             setVisitedSite(visitedSite.concat(event.target.id))
+    
         }
     }
-    
+
     const checkedStatus = (site) => {
         if(visitedSite.includes(site)) return "checked"
         return ""

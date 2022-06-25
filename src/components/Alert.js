@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
-import AuthContext from '../contexts/AuthContext'
+import SiteContext from '../contexts/SiteContext'
+
 
 function Alert() {
-    const {currentUser} = useContext(AuthContext)
+    const {currentUser} = useContext(SiteContext)
     // console.log(currentUser);
     return (
     <div>
