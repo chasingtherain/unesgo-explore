@@ -4,7 +4,14 @@ import { doc,updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 
 function TableRow({siteName, siteProvince}) {
-    const {currentUser,visitedSite, removeSiteFromList, setVisitedSite} = useContext(SiteContext)
+    const {currentUser,updateUserProgress, visitedSite, setVisitedSite} = useContext(SiteContext)
+    
+    const removeSiteFromList = (site) => {
+        let removedSiteIndex = visitedSite.indexOf(site)
+        let tempVisitedSite = visitedSite.slice(0,removedSiteIndex).concat(visitedSite.slice(removedSiteIndex+1))
+        setVisitedSite(tempVisitedSite)
+        updateUserProgress(tempVisitedSite)
+    }
 
     const handleCheck = (event) => {
         if(visitedSite.includes(event.target.id)) {
@@ -12,7 +19,7 @@ function TableRow({siteName, siteProvince}) {
         }
         else{
             setVisitedSite(visitedSite.concat(event.target.id))
-    
+            updateUserProgress(visitedSite.concat(event.target.id))
         }
     }
 

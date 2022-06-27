@@ -6,6 +6,7 @@ import { db } from "../firebase-config"
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { useNavigate } from 'react-router-dom';
+import {GoogleButton} from 'react-google-button'
 
 function SignUpPage() {
     const [userEmail, setUserEmail] = useState("")
@@ -50,7 +51,9 @@ function SignUpPage() {
     <div>
         <div className="flex flex-col w-full border-opacity-50">
             <div className='grid h-28 card rounded-box place-items-center my-3'>
-                <button className="btn btn-wide mt-6">Sign Up with Google</button>
+                <button className="mt-6">
+                    <GoogleButton label="Sign up with Google"/>
+                </button>
             </div>
             <div className="divider">OR</div>
             <div className="grid h-56 card rounded-box place-items-center my-1">

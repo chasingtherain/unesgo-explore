@@ -1,11 +1,20 @@
 import React, { useContext } from 'react'
+import unescoSiteData from '../../unescoSiteData'
 import { useLocation } from 'react-router-dom'
 import SiteContext from '../../contexts/SiteContext'
 
 
 function Select() {
+  const provinceData = ["All Province / Region","Anhui","Beijing",  "Chongqing",  "Fujian",  "Gansu",  "Guangdong",  "Guangxi",  "Guizhou",  "Hainan",  "Hebei",  "Heilongjiang",  "Henan",  "Hong Kong",  "Hubei",  "Hunan",  "Inner Mongolia",  "Jiangsu",  "Jiangxi",  "Jilin",  "Liaoning",  "Macau",  "Ningxia",  "Qinghai",  "Shaanxi",  "Shandong",  "Shanghai",  "Shanxi",  "Sichuan",  "Tianjin","Tibet",  "Xinjiang","Yunnan","Zhejiang"]
   const location = useLocation()
-  const {handleSelectProvince, provinceData} = useContext(SiteContext)
+  const {setProvinceSite,setSelectedProvince} = useContext(SiteContext)
+
+  const handleSelectProvince = (event) => {
+    setSelectedProvince(event.target.value);
+    
+    if(event.target.value === "All Province / Region"){setProvinceSite(unescoSiteData.map(site => site))}
+    else{ setProvinceSite(unescoSiteData.filter(object => object["admin_region"] === event.target.value))}
+  }
   
   return (
     <div>
