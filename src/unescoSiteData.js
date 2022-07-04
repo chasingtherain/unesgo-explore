@@ -499,7 +499,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Xinjiang",
-      "name": "Silk Roads: the Routes Network of \n Chang'an-Tianshan Corridor",
+      "name": "Silk Roads: the Routes Network \n of Chang'an-Tianshan Corridor",
       "site_id": 1442,
       "trans_province": 1
     },

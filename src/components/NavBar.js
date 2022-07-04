@@ -1,16 +1,16 @@
-import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-// import { useLocation, useNavigate } from 'react-router-dom'
-import SiteContext from '../contexts/SiteContext'
-import { getAuth, signOut } from 'firebase/auth'
+import { signOut } from 'firebase/auth'
+import { useSiteContext } from '../hooks/useSiteContext'
+import { auth } from '../firebase-config'
 
 function NavBar() {
-    const {currentUser, setVisitedSite, setCurrentUser, setSelectedProvince} = useContext(SiteContext)
+    const {currentUser, setVisitedSite, setCurrentUser, setSelectedProvince} = useSiteContext()
+
     const navigate = useNavigate()
-    const auth = getAuth()
+
+    console.log(auth)
     // sign out user from platform
     const signOutCurrentUser = () =>{
-        // console.log(auth)
         console.log("sign out function triggered");
         signOut(auth).then(() => {
             // Sign-out successful.

@@ -1,12 +1,9 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import unescoSiteData from '../unescoSiteData'
 import { auth, db } from '../firebase-config';
-import { current } from 'daisyui/src/colors';
-import { getAuth, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signInWithRedirect } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth'
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
-import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-import { useNavigate } from 'react-router-dom';
 
 
 const SiteContext = createContext()
@@ -17,7 +14,7 @@ export const SiteContextProvider = ({children}) => {
     const [provinceSite, setProvinceSite] = useState((unescoSiteData.map(site => site)))
     const [visitedSite, setVisitedSite] = useState([])
     const [currentUser, setCurrentUser] = useState("")
-    const [isLoading, setIsloading] = useState(false)
+    const totalNumOfLocalSites = provinceSite.length
     
     // const provider = new GoogleAuthProvider();
     const [userEmail, setUserEmail] = useState("")
@@ -30,8 +27,7 @@ export const SiteContextProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
             setCurrentUser(currentUser)
             userNotInDb(currentUser)
-            retrieveProgress(currentUser)
-            setIsloading(false)   
+            retrieveProgress(currentUser) 
         })
         return () => {
             unsubscribe();
@@ -84,16 +80,15 @@ export const SiteContextProvider = ({children}) => {
     return <SiteContext.Provider value={{
         currentUser,
         provinceSite,
-        isLoading,
         selectedProvince,
         userEmail,
         userPassword,
+        totalNumOfLocalSites,
         visitedSite,
         // loginWithGoogleRedirect,
         retrieveProgress,
         updateUserProgress,
         setCurrentUser,
-        setIsloading,
         setProvinceSite,
         setSelectedProvince,
         setVisitedSite,

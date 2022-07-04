@@ -1,13 +1,13 @@
 import unescoSiteData from "../unescoSiteData"
-import SiteContext from "../contexts/SiteContext"
-import { useContext } from "react";
+import { useSiteContext } from "../hooks/useSiteContext";
 
 function Stats() {
-  const {provinceSite, selectedProvince, visitedSite} = useContext(SiteContext)
+  const {provinceSite, selectedProvince, totalNumOfLocalSites, visitedSite} = useSiteContext()
   const totalNumOfNationalSites = Array.from(new Set(unescoSiteData.map(site => site.name))).length
   const totalVisitedSiteCount = visitedSite.length
 
-  const totalNumOfLocalSites = provinceSite.length
+  console.log(unescoSiteData);
+  console.log(totalNumOfNationalSites);
 
   const countLocalSitesVisited = provinceSite.filter(site => visitedSite.includes(site.name)).length
   const remainingLocalSites = totalNumOfLocalSites-countLocalSitesVisited

@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {getAuth, signInWithEmailAndPassword,getRedirectResult, signInWithRedirect, GoogleAuthProvider  } from "firebase/auth";
-import SiteContext from '../contexts/SiteContext';
 import {GoogleButton} from "react-google-button"
 import AppleSignin from 'react-apple-signin-auth'
 import Spinner from '../components/Spinner';
 import Footer from '../components/Footer';
+import { useSiteContext } from '../hooks/useSiteContext';
 
 
 function SignInPage() {
     const auth = getAuth()
     const navigate = useNavigate()
-    const {currentUser, retrieveProgress, setCurrentUser, visitedSite, isLoading, setIsLoading} = useContext(SiteContext)
+    const {retrieveProgress, setCurrentUser} = useSiteContext()
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
     const provider = new GoogleAuthProvider();
@@ -21,9 +21,7 @@ function SignInPage() {
             // Signed in 
             const user = userCredential.user;
             setCurrentUser(user)
-            console.log("user: ", user, "currentUser: ", currentUser);
             retrieveProgress(user)
-            console.log("visitedSite: ", visitedSite);
             navigate('/')
           })
           .catch((error) => {
@@ -35,8 +33,6 @@ function SignInPage() {
     
     const loginWithGoogleRedirect = () =>{
         signInWithRedirect(auth, provider);
-        setIsLoading(true)
-        console.log("loading state: ", isLoading);
     }
 
 
@@ -54,8 +50,6 @@ function SignInPage() {
     },[])
 
     return (
-    (isLoading) ? <Spinner/>
-    :
     <div>
         <div className="flex flex-col w-full border-opacity-50">
             <div className='grid h-32 card rounded-box place-items-center my-3'>

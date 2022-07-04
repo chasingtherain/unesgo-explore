@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
-import SiteContext from '../contexts/SiteContext'
+import { useSiteContext } from '../hooks/useSiteContext'
 
 
 function Alert() {
-    const {currentUser} = useContext(SiteContext)
+    const {currentUser} = useSiteContext()
     // console.log(currentUser);
     return (
     <div>

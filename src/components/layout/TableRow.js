@@ -1,10 +1,7 @@
-import React, { useContext} from 'react'
-import SiteContext from '../../contexts/SiteContext';
-import { doc,updateDoc } from 'firebase/firestore';
-import { db } from '../../firebase-config';
+import { useSiteContext } from '../../hooks/useSiteContext';
 
 function TableRow({siteName, siteProvince}) {
-    const {currentUser,updateUserProgress, visitedSite, setVisitedSite} = useContext(SiteContext)
+    const {updateUserProgress, visitedSite, setVisitedSite} = useSiteContext()
     
     const removeSiteFromList = (site) => {
         let removedSiteIndex = visitedSite.indexOf(site)

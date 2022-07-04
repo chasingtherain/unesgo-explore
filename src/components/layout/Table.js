@@ -1,16 +1,13 @@
 import TableRow from "./TableRow"
-import SiteContext from "../../contexts/SiteContext"
-import { useContext, useEffect } from "react"
-import { doc,getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../../firebase-config';
+import { useSiteContext } from "../../hooks/useSiteContext";
 
 function Table() {
-    const {provinceSite, selectedProvince, visitedSite, setVisitedState} = useContext(SiteContext)
+    const {provinceSite} = useSiteContext()
 
     return (
     <div>
-        <div className="grid place-items-center overflow-x-auto w-full">
-            <table className="table">
+        <div className="grid place-items-center overflow-x-auto">
+            <table className="table w-1/2">
             {/* <!-- head --> */}
             <thead>
                 <tr>

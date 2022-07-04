@@ -1,13 +1,10 @@
-import React, { useContext } from 'react'
 import unescoSiteData from '../../unescoSiteData'
-import { useLocation } from 'react-router-dom'
-import SiteContext from '../../contexts/SiteContext'
+import { useSiteContext } from '../../hooks/useSiteContext'
 
 
 function Select() {
   const provinceData = ["All Province / Region","Anhui","Beijing",  "Chongqing",  "Fujian",  "Gansu",  "Guangdong",  "Guangxi",  "Guizhou",  "Hainan",  "Hebei",  "Heilongjiang",  "Henan",  "Hong Kong",  "Hubei",  "Hunan",  "Inner Mongolia",  "Jiangsu",  "Jiangxi",  "Jilin",  "Liaoning",  "Macau",  "Ningxia",  "Qinghai",  "Shaanxi",  "Shandong",  "Shanghai",  "Shanxi",  "Sichuan",  "Tianjin","Tibet",  "Xinjiang","Yunnan","Zhejiang"]
-  const location = useLocation()
-  const {setProvinceSite,setSelectedProvince} = useContext(SiteContext)
+  const {setProvinceSite,setSelectedProvince} = useSiteContext()
 
   const handleSelectProvince = (event) => {
     setSelectedProvince(event.target.value);
@@ -18,9 +15,9 @@ function Select() {
   
   return (
     <div>
-        <select className="ml-6 mt-6 mb-6 select select-info w-full max-w-xs sm:select-sm md:select-md lg:select-lg" onChange={handleSelectProvince}>
+        <select className="ml-6 mt-6 mb-6 select select-info w-full" onChange={handleSelectProvince}>
         
-        {provinceData.map((item,index) => <option key={index} id={item}>{item}</option>)}
+        {provinceData.map((item,index) => <option className='text-2xl' key={index} id={item}>{item}</option>)}
         </select>
     </div>
   )
