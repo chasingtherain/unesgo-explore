@@ -1,15 +1,11 @@
 import NavBar from "./components/NavBar";
-import LandingPage from "./pages/LandingPage";
 import NotFound from "./pages/NotFound";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import CountrySiteList from "./components/CountrySiteList";
-import { SiteContextProvider } from "./contexts/SiteContext";
-import Footer from "./components/Footer";
 import SignInPage from "./pages/SignInPage";
 import ResetPassword from "./pages/ResetPassword";
 import SignUpPage from "./pages/SignUpPage";
 import { ToastContainer } from 'react-toastify';
-import { AuthContextProvider } from "./contexts/AuthContext";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Spinner from "./components/Spinner";
 

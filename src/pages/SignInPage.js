@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import {signInWithEmailAndPassword,getRedirectResult, signInWithRedirect, GoogleAuthProvider, FacebookAuthProvider  } from "firebase/auth";
+import {signInWithEmailAndPassword,getRedirectResult, signInWithRedirect, GoogleAuthProvider  } from "firebase/auth";
 import {GoogleButton} from "react-google-button"
 import Footer from '../components/Footer';
 import { useSiteContext } from '../hooks/useSiteContext';
@@ -14,7 +14,6 @@ function SignInPage() {
     const [userPassword, setUserPassword] = useState("")
     const [error, setError] = useState("")
     const googleProvider = new GoogleAuthProvider();
-    const facebookProvider = new FacebookAuthProvider();
 
     const signInWithEmail = async () => {
         await signInWithEmailAndPassword(auth, userEmail, userPassword).then((userCredential) => {
