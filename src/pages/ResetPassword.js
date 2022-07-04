@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Footer from '../components/Footer';
 
 function ResetPassword() {
   const [isResetClicked, setIsResetClicked] = useState(false)
@@ -25,7 +26,7 @@ function ResetPassword() {
             </div>)
               : <></>
             }
-
+          <Footer/>
         </div>
     </div>
   )

@@ -9,12 +9,12 @@ function Table() {
 
     return (
     <div>
-        <div className="overflow-x-auto">
-            <table className="table table w-full">
+        <div className="grid place-items-center overflow-x-auto w-full">
+            <table className="table">
             {/* <!-- head --> */}
             <thead>
                 <tr>
-                <th>
+                <th className="p-3"> 
                     <label>
                     <input type="checkbox" className="checkbox" disabled={true} />
                     </label>
@@ -23,7 +23,7 @@ function Table() {
                 <th>Province / Region</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className="whitespace-pre">
                 {/* <!-- row 1 --> */}
                 {
                     provinceSite

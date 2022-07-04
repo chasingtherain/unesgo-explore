@@ -30,11 +30,11 @@ function TableRow({siteName, siteProvince}) {
 
     return (
         <tr>
-            <th>
+            <th className='p-3'>
                 <input id={siteName} type="checkbox" className="checkbox checkbox-primary" onChange={handleCheck} checked={checkedStatus(siteName)}/>
             </th>
-            <td>
-                <div className="font-bold">{siteName}</div>
+            <td className='whitespace-pre'>
+                <div className="font-bold text-xs"><p>{siteName}</p></div>
             </td>
             <td>
                 {siteProvince}

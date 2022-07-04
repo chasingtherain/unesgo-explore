@@ -35,14 +35,8 @@ function NavBar() {
                 </button>
             </div>
             <div className="navbar-end">
-                {
-                    (currentUser) ? 
-                    (<button className ="btn text-xs px-2" onClick={signOutCurrentUser}> Log Out </button>)
-                    : (<button className ="btn text-xs px-2"> <Link to="/sign-in"> Login / Sign Up</Link> </button>)
-
-                }
-
-
+                {currentUser && <button className ="btn text-xs px-2" onClick={signOutCurrentUser}> Log Out </button>}
+                {!currentUser && <button className ="btn text-xs px-2"> <Link to="/sign-in"> Login / Sign Up</Link> </button>}
             </div>
         </div>
     </div>

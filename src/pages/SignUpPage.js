@@ -7,6 +7,8 @@ import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { useNavigate } from 'react-router-dom';
 import {GoogleButton} from 'react-google-button'
+import AppleSignin from 'react-apple-signin-auth'
+import Footer from '../components/Footer'
 
 function SignUpPage() {
     const [userEmail, setUserEmail] = useState("")
@@ -37,7 +39,7 @@ function SignUpPage() {
 
             setDoc(doc(db, "users", user.uid), newUser);
             toast("sign up successful")
-            navigate("/site")
+            navigate("/")
 
         })
         .catch((error) => {
@@ -50,13 +52,14 @@ function SignUpPage() {
     return (
     <div>
         <div className="flex flex-col w-full border-opacity-50">
-            <div className='grid h-28 card rounded-box place-items-center my-3'>
-                <button className="mt-6">
+            <div className='grid h-32 card rounded-box place-items-center my-3'>
+                <button>
                     <GoogleButton label="Sign up with Google"/>
                 </button>
+                <AppleSignin buttonExtraChildren="Sign in with Apple account" noDefaultStyle={false} />
             </div>
             <div className="divider">OR</div>
-            <div className="grid h-56 card rounded-box place-items-center my-1">
+            <div className="grid h-56 card rounded-box place-items-center">
                 <div className="form-control w-full max-w-xs">
                     <input type="text" placeholder="Email address" className="input input-bordered w-full max-w-xs" onChange={(event) => setUserEmail(event.target.value)}/>
                     <input type="password" placeholder="Password" className="input input-bordered w-full max-w-xs my-3" onChange={(event) => setUserPassword(event.target.value)}/>
@@ -65,11 +68,10 @@ function SignUpPage() {
             </div>
             <div className="divider"></div>
             <div className="grid h-18 card rounded-box place-items-center">
-                <h1 className='font-bold mb-2'>Already have an account?</h1>
                 <Link to="/sign-in" className='text-secondary'>Login instead</Link>
             </div>
         </div>
-
+        <Footer/>
     </div>
   )
 }

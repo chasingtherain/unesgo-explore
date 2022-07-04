@@ -1,8 +1,12 @@
 import React from 'react'
+import Footer from '../components/Footer'
 
 function NotFound() {
   return (
-    <div>Error 404: Page Not Found</div>
+    <div>
+      <h1>Error 404: Page Not Found</h1>
+      <Footer/>
+    </div>
   )
 }
 

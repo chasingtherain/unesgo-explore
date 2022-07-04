@@ -7,7 +7,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Anhui",
-      "name": "Ancient Villages in Southern Anhui – Xidi and Hongcun",
+      "name": "Ancient Villages in Southern Anhui – Xidi \n and Hongcun",
       "site_id": 1002,
       "trans_province": 0
     },
@@ -25,7 +25,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Beijing",
-      "name": "Imperial Tombs of the Ming and Qing Dynasties, including the Ming tombs and the Ming Xiaoling Mausoleum",
+      "name": "Imperial Tombs of the Ming and Qing \n Dynasties including the Ming tombs \n and the Ming Xiaoling Mausoleum",
       "site_id": 1004,
       "trans_province": 1
     },
@@ -49,7 +49,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Beijing",
-      "name": "Imperial Palaces of the Ming and Qing Dynasties, including the Forbidden City and Mukden Palace",
+      "name": "Imperial Palaces of the Ming and Qing \n Dynasties including the \n Forbidden City and Mukden Palace",
       "site_id": 439,
       "trans_province": 1
     },
@@ -79,7 +79,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Fujian",
-      "name": "Historic Monuments and Sites of Ancient Quanzhou (Zayton)",
+      "name": "Historic Monuments and Sites \n of Ancient Quanzhou (Zayton)",
       "site_id": 1561,
       "trans_province": 0
     },
@@ -109,7 +109,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Gansu",
-      "name": "Silk Roads: the Routes Network of Chang'an-Tianshan Corridor",
+      "name": "Silk Roads: the Routes Network \n of Chang'an-Tianshan Corridor",
       "site_id": 1442,
       "trans_province": 1
     },
@@ -139,7 +139,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Guangxi",
-      "name": "Zuojiang Huashan Rock Art Cultural Landscape",
+      "name": "Zuojiang Huashan Rock Art \n Cultural Landscape",
       "site_id": 1508,
       "trans_province": 0
     },
@@ -181,7 +181,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Hebei",
-      "name": "Chengde Mountain Resort and its Outlying Temples in Chengde",
+      "name": "Chengde Mountain Resort and \n its Outlying Temples in Chengde",
       "site_id": 703,
       "trans_province": 0
     },
@@ -205,13 +205,13 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Henan",
-      "name": "Silk Roads: the Routes Network of Chang'an-Tianshan Corridor",
+      "name": "Silk Roads: the Routes Network \n of Chang'an-Tianshan Corridor",
       "site_id": 1442,
       "trans_province": 1
     },
     {
       "admin_region": "Henan",
-      "name": "Historic Monuments of Dengfeng in “The Centre of Heaven and Earth”",
+      "name": "Historic Monuments of Dengfeng in  \n “The Centre of Heaven and Earth”",
       "site_id": 1305,
       "trans_province": 0
     },
@@ -247,7 +247,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Hubei",
-      "name": "Ancient Building Complex in the Wudang Mountains",
+      "name": "Ancient Building Complex in the \n Wudang Mountains",
       "site_id": 705,
       "trans_province": 0
     },
@@ -271,7 +271,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Hunan",
-      "name": "Wulingyuan Scenic and Historic Interest Area",
+      "name": "Wulingyuan Scenic and \n Historic Interest Area",
       "site_id": 640,
       "trans_province": 0
     },
@@ -289,7 +289,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Jiangsu",
-      "name": "Migratory Bird Sanctuaries along the Coast of Yellow Sea-Bohai Gulf of China (Phase I)",
+      "name": "Migratory Bird Sanctuaries along \n the Coast of Yellow Sea-Bohai Gulf of China \n (Phase I)",
       "site_id": 1606,
       "trans_province": 0
     },
@@ -301,7 +301,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Jiangsu",
-      "name": "Imperial Tombs of the Ming and Qing Dynasties, including the Ming tombs and the Ming Xiaoling Mausoleum",
+      "name": "Imperial Tombs of the Ming and Qing \n Dynasties including the Ming tombs \n and the Ming Xiaoling Mausoleum",
       "site_id": 1004,
       "trans_province": 1
     },
@@ -337,7 +337,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Jilin",
-      "name": "Capital Cities and Tombs of the Ancient Koguryo Kingdom",
+      "name": "Capital Cities and Tombs of \n the Ancient Koguryo Kingdom",
       "site_id": 1135,
       "trans_province": 0
     },
@@ -349,7 +349,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Liaoning",
-      "name": "Imperial Palaces of the Ming and Qing Dynasties, including the Forbidden City and Mukden Palace",
+      "name": "Imperial Palaces of the Ming and Qing \n Dynasties including the \n Forbidden City and Mukden Palace",
       "site_id": 439,
       "trans_province": 1
     },
@@ -385,7 +385,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Shaanxi",
-      "name": "Silk Roads: the Routes Network of Chang'an-Tianshan Corridor",
+      "name": "Silk Roads: the Routes Network \n of Chang'an-Tianshan Corridor",
       "site_id": 1442,
       "trans_province": 1
     },
@@ -409,7 +409,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Shandong",
-      "name": "Temple and Cemetery of Confucius and the Kong Family Mansion in Qufu",
+      "name": "Temple and Cemetery of Confucius \n and the Kong Family Mansion in Qufu",
       "site_id": 704,
       "trans_province": 0
     },
@@ -457,25 +457,25 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Sichuan",
-      "name": "Mount Qingcheng and the Dujiangyan Irrigation System",
+      "name": "Mount Qingcheng and the \n Dujiangyan Irrigation System",
       "site_id": 1001,
       "trans_province": 0
     },
     {
       "admin_region": "Sichuan",
-      "name": "Mount Emei Scenic Area, including Leshan Giant Buddha Scenic Area",
+      "name": "Mount Emei Scenic Area, \n including Leshan Giant Buddha Scenic Area",
       "site_id": 779,
       "trans_province": 0
     },
     {
       "admin_region": "Sichuan",
-      "name": "Huanglong Scenic and Historic Interest Area",
+      "name": "Huanglong Scenic and \n Historic Interest Area",
       "site_id": 638,
       "trans_province": 0
     },
     {
       "admin_region": "Sichuan",
-      "name": "Jiuzhaigou Valley Scenic and Historic Interest Area",
+      "name": "Jiuzhaigou Valley Scenic and \n Historic Interest Area",
       "site_id": 637,
       "trans_province": 0
     },
@@ -493,13 +493,13 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Tibet",
-      "name": "Historic Ensemble of the Potala Palace, including the Jokhang Temple and Norbulingka",
+      "name": "Historic Ensemble of the Potala Palace, \n including the Jokhang Temple \n and Norbulingka",
       "site_id": 707,
       "trans_province": 0
     },
     {
       "admin_region": "Xinjiang",
-      "name": "Silk Roads: the Routes Network of Chang'an-Tianshan Corridor",
+      "name": "Silk Roads: the Routes Network of \n Chang'an-Tianshan Corridor",
       "site_id": 1442,
       "trans_province": 1
     },
@@ -517,13 +517,13 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Yunnan",
-      "name": "Cultural Landscape of Honghe Hani Rice Terraces",
+      "name": "Cultural Landscape of \n Honghe Hani Rice Terraces",
       "site_id": 1111,
       "trans_province": 0
     },
     {
       "admin_region": "Yunnan",
-      "name": "Three Parallel Rivers of Yunnan Protected Areas",
+      "name": "Three Parallel Rivers of \n Yunnan Protected Areas",
       "site_id": 1083,
       "trans_province": 0
     },
@@ -541,7 +541,7 @@ const unescoSiteData = [
     },
     {
       "admin_region": "Zhejiang",
-      "name": "Archaeological Ruins of Liangzhu City",
+      "name": "Archaeological Ruins \n of Liangzhu City",
       "site_id": 1592,
       "trans_province": 0
     },

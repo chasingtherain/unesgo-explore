@@ -9,24 +9,26 @@ import SignInPage from "./pages/SignInPage";
 import ResetPassword from "./pages/ResetPassword";
 import SignUpPage from "./pages/SignUpPage";
 import { ToastContainer } from 'react-toastify';
+import { AuthContextProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
     <div>
       <SiteContextProvider>
-          <Router>
-            <NavBar/> 
-            <Routes>
-              <Route exact path = '/' element={<LandingPage/>}/>
-              <Route path = '/sign-in' element={<SignInPage/>}/>
-              <Route path = '/sign-up' element={<SignUpPage/>}/>
-              <Route path = '/forgot-password' element={<ResetPassword/>}/>
-              <Route path = '/*' element={<NotFound/>}/>
-              <Route path = "/site" element={<CountrySiteList/>}/>
-            </Routes>
-            <Footer/>
-          </Router>
-        <ToastContainer/>
+        <AuthContextProvider>
+            <Router>
+              <NavBar/> 
+              <Routes>
+                <Route exact path = '/' element={<CountrySiteList/>}/>
+                <Route path = '/sign-in' element={<SignInPage/>}/>
+                <Route path = '/sign-up' element={<SignUpPage/>}/>
+                <Route path = '/forgot-password' element={<ResetPassword/>}/>
+                <Route path = '/*' element={<NotFound/>}/>
+                {/* <Route path = "/site" element={<CountrySiteList/>}/> */}
+              </Routes>
+            </Router>
+          <ToastContainer/>
+        </AuthContextProvider>
       </SiteContextProvider>
     </div>
   );

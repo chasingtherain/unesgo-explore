@@ -3,7 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import {getAuth, signInWithEmailAndPassword,getRedirectResult, signInWithRedirect, GoogleAuthProvider  } from "firebase/auth";
 import SiteContext from '../contexts/SiteContext';
 import {GoogleButton} from "react-google-button"
+import AppleSignin from 'react-apple-signin-auth'
 import Spinner from '../components/Spinner';
+import Footer from '../components/Footer';
 
 
 function SignInPage() {
@@ -22,7 +24,7 @@ function SignInPage() {
             console.log("user: ", user, "currentUser: ", currentUser);
             retrieveProgress(user)
             console.log("visitedSite: ", visitedSite);
-            navigate('/site')
+            navigate('/')
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -42,7 +44,7 @@ function SignInPage() {
         const handleGetRedirectResult = async () => {
             const result = await getRedirectResult(auth);
             if(result) {
-                navigate('/site')
+                navigate('/')
             }
         }
         return () =>{
@@ -56,10 +58,11 @@ function SignInPage() {
     :
     <div>
         <div className="flex flex-col w-full border-opacity-50">
-            <div className='grid h-28 card rounded-box place-items-center my-3'>
-                <button className="mt-6" onClick={loginWithGoogleRedirect}>
+            <div className='grid h-32 card rounded-box place-items-center my-3'>
+                <button onClick={loginWithGoogleRedirect}>
                     <GoogleButton/>
                 </button>
+                <AppleSignin buttonExtraChildren="Sign in with Apple account" noDefaultStyle={false} />
             </div>
             <div className="divider">OR</div>
             <div className="grid h-56 card rounded-box place-items-center my-1">
@@ -72,13 +75,12 @@ function SignInPage() {
             </div>
             <div className="divider"></div>
             <div className="grid h-18 card rounded-box place-items-center">
-                <h1 className='font-bold mb-2'>Don't have an account?</h1>
                 <button className="btn btn-wide btn-secondary">
                     <Link to="/sign-up">Create an account</Link>
                 </button>
             </div>
         </div>
-    
+        <Footer/>
     </div>
     )
 }
