@@ -15,9 +15,8 @@ function Select() {
   
   return (
     <div>
-        <select className="ml-6 mt-6 mb-6 select select-info w-full" onChange={handleSelectProvince}>
-        
-        {provinceData.map((item,index) => <option className='text-2xl' key={index} id={item}>{item}</option>)}
+        <select className="ml-6 mt-6 mb-6 select select-info w-72" onChange={handleSelectProvince}>
+        {provinceData.map((item,index) => <option key={index} id={item}>{item}</option>)}
         </select>
     </div>
   )
