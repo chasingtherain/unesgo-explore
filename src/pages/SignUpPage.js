@@ -7,12 +7,12 @@ import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { useNavigate } from 'react-router-dom';
 import {GoogleButton} from 'react-google-button'
-import AppleSignin from 'react-apple-signin-auth'
 import Footer from '../components/Footer'
 
 function SignUpPage() {
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
+    const [error, setError] = useState("")
     const navigate = useNavigate()
 
 
@@ -21,16 +21,12 @@ function SignUpPage() {
         const auth = getAuth();
 
         if(userPassword.length < 6){
-            console.log("toasting in progress");
-            toast.error("too short")}
+            toast.error("Password needs to be at least 6 characters long!")}
         else{
         createUserWithEmailAndPassword(auth, userEmail, userPassword)
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            console.log("result: ", userCredential)
-            console.log(user);
-
             const newUser = {
                 email: user.email,
                 timestamp: new Date(),
@@ -44,8 +40,8 @@ function SignUpPage() {
         })
         .catch((error) => {
             const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
+            if (errorCode === "auth/email-already-in-use") setError("Email already exists! Please log in")
+            else setError("Sign up with a valid email!")
         });}
     }
 
@@ -56,7 +52,8 @@ function SignUpPage() {
                 <button>
                     <GoogleButton label="Sign up with Google"/>
                 </button>
-                <AppleSignin buttonExtraChildren="Sign in with Apple account" noDefaultStyle={false} />
+                {/* to be implemented in future */}
+                {/* <button className='btn'> Continue with Facebook </button> */}
             </div>
             <div className="divider">OR</div>
             <div className="grid h-56 card rounded-box place-items-center">
@@ -65,6 +62,8 @@ function SignUpPage() {
                     <input type="password" placeholder="Password" className="input input-bordered w-full max-w-xs my-3" onChange={(event) => setUserPassword(event.target.value)}/>
                 </div>
                 <button className="btn btn-wide btn-primary my-2" onClick={signUpWithEmail}>Sign Up</button>
+                {error && <p className='text-red-400'>{error}</p>}
+
             </div>
             <div className="divider"></div>
             <div className="grid h-18 card rounded-box place-items-center">

@@ -8,7 +8,6 @@ function NavBar() {
 
     const navigate = useNavigate()
 
-    console.log(auth)
     // sign out user from platform
     const signOutCurrentUser = () =>{
         console.log("sign out function triggered");

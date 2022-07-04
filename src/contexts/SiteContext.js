@@ -25,9 +25,11 @@ export const SiteContextProvider = ({children}) => {
 
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
-            setCurrentUser(currentUser)
-            userNotInDb(currentUser)
-            retrieveProgress(currentUser) 
+            if(currentUser){
+                setCurrentUser(currentUser)
+                userNotInDb(currentUser)
+                retrieveProgress(currentUser) 
+            }
         })
         return () => {
             unsubscribe();
@@ -42,7 +44,6 @@ export const SiteContextProvider = ({children}) => {
         const docRef =  doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
         const userProgress = docSnap.data().progress
-        console.log(userProgress);
         setVisitedSite(userProgress)
     }
 

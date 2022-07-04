@@ -5,10 +5,6 @@ function Stats() {
   const {provinceSite, selectedProvince, totalNumOfLocalSites, visitedSite} = useSiteContext()
   const totalNumOfNationalSites = Array.from(new Set(unescoSiteData.map(site => site.name))).length
   const totalVisitedSiteCount = visitedSite.length
-
-  console.log(unescoSiteData);
-  console.log(totalNumOfNationalSites);
-
   const countLocalSitesVisited = provinceSite.filter(site => visitedSite.includes(site.name)).length
   const remainingLocalSites = totalNumOfLocalSites-countLocalSitesVisited
 

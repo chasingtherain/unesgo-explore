@@ -3,7 +3,6 @@ import { useSiteContext } from '../hooks/useSiteContext'
 
 function Alert() {
     const {currentUser} = useSiteContext()
-    // console.log(currentUser);
     return (
     <div>
         {
