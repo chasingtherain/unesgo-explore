@@ -10,28 +10,31 @@ import ResetPassword from "./pages/ResetPassword";
 import SignUpPage from "./pages/SignUpPage";
 import { ToastContainer } from 'react-toastify';
 import { AuthContextProvider } from "./contexts/AuthContext";
+import { useAuthContext } from "./hooks/useAuthContext";
+import Spinner from "./components/Spinner";
 
 function App() {
-  return (
-    <div>
-      <SiteContextProvider>
-        <AuthContextProvider>
-            <Router>
-              <NavBar/> 
-              <Routes>
-                <Route exact path = '/' element={<CountrySiteList/>}/>
-                <Route path = '/sign-in' element={<SignInPage/>}/>
-                <Route path = '/sign-up' element={<SignUpPage/>}/>
-                <Route path = '/forgot-password' element={<ResetPassword/>}/>
-                <Route path = '/*' element={<NotFound/>}/>
-                {/* <Route path = "/site" element={<CountrySiteList/>}/> */}
-              </Routes>
-            </Router>
-          <ToastContainer/>
-        </AuthContextProvider>
-      </SiteContextProvider>
-    </div>
-  );
+    const {authIsReady} = useAuthContext()
+
+    return (
+      <div>
+        {authIsReady && (
+              <Router>
+                <NavBar/> 
+                <Routes>
+                  <Route exact path = '/' element={<CountrySiteList/>}/>
+                  <Route path = '/sign-in' element={<SignInPage/>}/>
+                  <Route path = '/sign-up' element={<SignUpPage/>}/>
+                  <Route path = '/forgot-password' element={<ResetPassword/>}/>
+                  <Route path = '/*' element={<NotFound/>}/>
+                  {/* <Route path = "/site" element={<CountrySiteList/>}/> */}
+                </Routes>
+              </Router>
+        )}
+        {!authIsReady && <Spinner/>}
+        <ToastContainer/>
+      </div>
+    );
 }
 
 export default App;

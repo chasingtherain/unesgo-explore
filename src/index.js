@@ -2,11 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-
+import { SiteContextProvider } from './contexts/SiteContext';
+import { AuthContextProvider } from './contexts/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <SiteContextProvider>
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
+    </SiteContextProvider>
   </React.StrictMode>
 );

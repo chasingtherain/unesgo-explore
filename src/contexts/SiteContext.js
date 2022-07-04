@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import unescoSiteData from '../unescoSiteData'
-import { db } from '../firebase-config';
+import { auth, db } from '../firebase-config';
 import { current } from 'daisyui/src/colors';
 import { getAuth, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signInWithRedirect } from 'firebase/auth'
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
@@ -18,9 +18,7 @@ export const SiteContextProvider = ({children}) => {
     const [visitedSite, setVisitedSite] = useState([])
     const [currentUser, setCurrentUser] = useState("")
     const [isLoading, setIsloading] = useState(false)
-
-    // auth related state
-    const auth = getAuth()
+    
     // const provider = new GoogleAuthProvider();
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
