@@ -1,6 +1,6 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useState, useReducer } from "react";
 import { auth } from "../firebase-config";
-
+import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 export const AuthContext = createContext()
 
 export const authReducer = (state,action) => {
@@ -10,7 +10,7 @@ export const authReducer = (state,action) => {
         case "LOGIN":
             return {...state, user: action.payload}
         case "LOGOUT":
-            return {...state, user: action.payload}
+            return {...state, user: null}
         case "AUTH_IS_READY":
             return {...state, user: action.payload,authIsReady: true}
         default: 
@@ -19,11 +19,18 @@ export const authReducer = (state,action) => {
 }
 
 export const AuthContextProvider = ({children}) => {
+    const [googleLoading, setGoogleLoading] = useState(false)
+    const googleProvider = new GoogleAuthProvider();
 
     const [state, dispatch] = useReducer(authReducer, {
         user: null,
         authIsReady: false
     })
+
+    const loginWithGoogleRedirect = () =>{
+        setGoogleLoading(true)
+        signInWithRedirect(auth, googleProvider);
+    }
 
     useEffect(()=>{
       const unsub = auth.onAuthStateChanged((user) => {
@@ -35,7 +42,7 @@ export const AuthContextProvider = ({children}) => {
     console.log("Authcontext state: ", state.user);
 
     return(
-        <AuthContext.Provider value={{...state, dispatch}}>
+        <AuthContext.Provider value={{...state, dispatch,googleLoading, loginWithGoogleRedirect}}>
             {children}
         </AuthContext.Provider>
     )

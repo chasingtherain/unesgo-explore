@@ -11,7 +11,7 @@ import Spinner from "./components/Spinner";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-    const {authIsReady, user} = useAuthContext()
+    const {authIsReady} = useAuthContext()
 
     return (
       <div>

@@ -15,12 +15,12 @@ function NavBar() {
         console.log("sign out function triggered");
         signOut(auth).then(() => {
             // Sign-out successful.
-            console.log("sign out successful");
-            dispatch({type: "LOGOUT", payload: ""})
+            dispatch({type: "LOGOUT", payload: null})
+            setSelectedProvince("All Province / Region")
             setCurrentUser("")
             setVisitedSite([])
-            setSelectedProvince("All Province / Region")
-            navigate('/')
+            console.log("sign out successful");
+            navigate('/sign-in')
 
           }).catch((error) => {
             // An error happened.
