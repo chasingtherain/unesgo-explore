@@ -2,9 +2,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { useSiteContext } from '../hooks/useSiteContext'
 import { auth } from '../firebase-config'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 function NavBar() {
     const {currentUser, setVisitedSite, setCurrentUser, setSelectedProvince} = useSiteContext()
+    const {dispatch} = useAuthContext()
 
     const navigate = useNavigate()
 
@@ -14,6 +16,7 @@ function NavBar() {
         signOut(auth).then(() => {
             // Sign-out successful.
             console.log("sign out successful");
+            dispatch({type: "LOGOUT", payload: ""})
             setCurrentUser("")
             setVisitedSite([])
             setSelectedProvince("All Province / Region")

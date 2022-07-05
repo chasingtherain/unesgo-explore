@@ -8,8 +8,12 @@ import 'react-toastify/dist/ReactToastify.css'
 import { useNavigate } from 'react-router-dom';
 import {GoogleButton} from 'react-google-button'
 import Footer from '../components/Footer'
+import { useAuthContext } from '../hooks/useAuthContext'
+import { Action } from 'history'
+
 
 function SignUpPage() {
+    const {dispatch} = useAuthContext()
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
     const [error, setError] = useState("")
@@ -27,12 +31,12 @@ function SignUpPage() {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
+            dispatch({type: "SIGNUP", payload: user})
             const newUser = {
                 email: user.email,
                 timestamp: new Date(),
                 progress: []
             }
-
             setDoc(doc(db, "users", user.uid), newUser);
             toast("sign up successful")
             navigate("/")

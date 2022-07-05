@@ -51,7 +51,7 @@ export const SiteContextProvider = ({children}) => {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            console.log("Document already exist! user data:", docSnap.data());
+            // console.log("Document already exist! user data:", docSnap.data());
         } 
         else {
             console.log("No such document!");

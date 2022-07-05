@@ -5,6 +5,8 @@ export const AuthContext = createContext()
 
 export const authReducer = (state,action) => {
     switch (action.type){
+        case "SIGNUP":
+            return {...state, user: action.payload}
         case "LOGIN":
             return {...state, user: action.payload}
         case "LOGOUT":
@@ -30,7 +32,7 @@ export const AuthContextProvider = ({children}) => {
         })
     },[])
 
-    // console.log("Authcontext state: ", state);
+    console.log("Authcontext state: ", state.user);
 
     return(
         <AuthContext.Provider value={{...state, dispatch}}>

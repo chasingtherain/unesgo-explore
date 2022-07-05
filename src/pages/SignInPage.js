@@ -5,10 +5,12 @@ import {GoogleButton} from "react-google-button"
 import Footer from '../components/Footer';
 import { useSiteContext } from '../hooks/useSiteContext';
 import { auth } from '../firebase-config';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 
 function SignInPage() {
     const navigate = useNavigate()
+    const {dispatch} = useAuthContext()
     const {retrieveProgress, setCurrentUser} = useSiteContext()
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
@@ -19,6 +21,7 @@ function SignInPage() {
         await signInWithEmailAndPassword(auth, userEmail, userPassword).then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
+            dispatch({type: "LOGIN", payload: user})
             setCurrentUser(user)
             retrieveProgress(user)
             navigate('/')
@@ -43,6 +46,7 @@ function SignInPage() {
             const result = await getRedirectResult(auth);
             console.log(result.user);
             if(result) {
+                dispatch({type: "LOGIN", payload: result.user})
                 navigate('/')
             }
         }
