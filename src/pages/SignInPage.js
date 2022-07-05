@@ -32,7 +32,6 @@ function SignInPage() {
             const errorCode = error.code;
             setError(errorCode)
           });
-        setLoginBtnLoading("")
     } 
     
     return (
