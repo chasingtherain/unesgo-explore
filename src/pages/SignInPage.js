@@ -11,7 +11,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 function SignInPage() {
     const navigate = useNavigate()
     const {dispatch, googleLoading, loginWithGoogleRedirect} = useAuthContext()
-    const {retrieveProgress, setCurrentUser} = useSiteContext()
+    const {retrieveProgress} = useSiteContext()
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
     const [error, setError] = useState("")
@@ -24,7 +24,6 @@ function SignInPage() {
             // Signed in 
             const user = userCredential.user;
             dispatch({type: "LOGIN", payload: user})
-            setCurrentUser(user)
             retrieveProgress(user)
             navigate('/')
           })
@@ -32,6 +31,7 @@ function SignInPage() {
             const errorCode = error.code;
             setError(errorCode)
           });
+          setLoginBtnLoading("")
     } 
     
     return (
@@ -52,7 +52,13 @@ function SignInPage() {
                     <input type="password" placeholder="Password" className="input input-bordered w-full max-w-xs my-3" onChange={(event) => setUserPassword(event.target.value)}/>
                 </div>
                 <button className={`btn btn-wide btn-primary my-2 ${loginBtnLoading}`} onClick={signInWithEmail}>LOGIN</button>
-                {error && <p className='text-red-600'>Invalid email or password</p>}
+                {error && 
+                    <>
+                        <p className='text-red-600'>Invalid email or password.</p>
+                        <p className='text-red-600'>Sign up below if you haven done so.</p>
+                    </>
+                }
+                
                 <Link to="/forgot-password" className='text-secondary'>Forgot password?</Link>
             </div>
             <div className="divider"></div>

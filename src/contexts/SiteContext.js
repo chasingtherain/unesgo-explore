@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import unescoSiteData from '../unescoSiteData'
 import { auth, db } from '../firebase-config';
 import { onAuthStateChanged } from 'firebase/auth'
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 import 'react-toastify/dist/ReactToastify.css'
 
 
@@ -13,7 +13,6 @@ export const SiteContextProvider = ({children}) => {
     const [selectedProvince, setSelectedProvince] = useState("All Province / Region")
     const [provinceSite, setProvinceSite] = useState((unescoSiteData.map(site => site)))
     const [visitedSite, setVisitedSite] = useState([])
-    const [currentUser, setCurrentUser] = useState("")
     const totalNumOfLocalSites = provinceSite.length
     
     // const provider = new GoogleAuthProvider();
@@ -24,11 +23,10 @@ export const SiteContextProvider = ({children}) => {
 
 
     useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
-            if(currentUser){
-                setCurrentUser(currentUser)
-                userNotInDb(currentUser)
-                retrieveProgress(currentUser) 
+        const unsubscribe = onAuthStateChanged(auth,(user)=>{
+            if(user){
+                userNotInDb(user)
+                retrieveProgress(user) 
             }
         })
         return () => {
@@ -66,20 +64,7 @@ export const SiteContextProvider = ({children}) => {
     }
 
 
-
-    // update user progress
-    const updateUserProgress = (visitedSiteList) => {
-        const docRef = doc(db, "users", currentUser.uid);        
-                    // To update progress
-                    updateDoc(docRef, {
-                        "progress": visitedSiteList
-                    });
-                    console.log("user logged in, new data added!");
-    }
-
-
     return <SiteContext.Provider value={{
-        currentUser,
         provinceSite,
         selectedProvince,
         userEmail,
@@ -88,8 +73,6 @@ export const SiteContextProvider = ({children}) => {
         visitedSite,
         // loginWithGoogleRedirect,
         retrieveProgress,
-        updateUserProgress,
-        setCurrentUser,
         setProvinceSite,
         setSelectedProvince,
         setVisitedSite,

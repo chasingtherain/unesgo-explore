@@ -2,6 +2,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import React, { useState } from 'react'
 import Footer from '../components/Footer';
 import {auth} from "../firebase-config"
+import { toast } from 'react-toastify';
 
 function ResetPassword() {
   const [isResetClicked, setIsResetClicked] = useState(false)
@@ -11,8 +12,11 @@ function ResetPassword() {
   const handleResetBtnClick = async (email) => {
     sendPasswordResetEmail(auth, email)
     .then(() => {
+      console.log("reset email for: ", email);
       // Password reset email sent!
       setIsResetClicked(true)
+      toast.success("Reset successful, check your email!")
+      setEmailInput("")
       // hides error if user inputs valid email on second attempt
       setError("")
     })
@@ -31,17 +35,18 @@ function ResetPassword() {
                 <span className="label-text">Enter your email address</span>
             </label>
             <div className="input-group">
-                <input type="text" placeholder="admin@mail.com" onChange={(e) => setEmailInput(e.target.value)} className="input input-bordered"/>
+                <input type="text" placeholder="admin@mail.com" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} className="input input-bordered"/>
                 <button className="btn btn-square" onClick={() => handleResetBtnClick(emailInput)}>SEND</button>
             </div>
             {
             (isResetClicked) ? 
               (<div className='mt-5'>
-              <p>Please check your email for instructions on how to reset your password</p>
+              <p>Email sent! </p>
+              <p className='text-red-500'>Note: Password cannot be reset for google sign ups</p>
             </div>)
               : <></>
             }
-            {error && <p>{error}</p>}
+            {error && <p className='text-red-500'>{`error: ${error}`}</p>}
           <Footer/>
         </div>
     </div>

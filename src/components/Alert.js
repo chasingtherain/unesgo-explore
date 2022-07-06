@@ -1,12 +1,11 @@
-import { useSiteContext } from '../hooks/useSiteContext'
-
+import { useAuthContext } from '../hooks/useAuthContext'
 
 function Alert() {
-    const {currentUser} = useSiteContext()
+    const {user} = useAuthContext()
     return (
     <div>
         {
-            (currentUser) ? 
+            (user) ? 
                 <div></div>:
                 (<div className="alert alert-warning shadow-lg">
                     <div>

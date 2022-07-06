@@ -39,7 +39,7 @@ function SignUpPage() {
                 progress: []
             }
             setDoc(doc(db, "users", user.uid), newUser);
-            toast("sign up successful")
+            toast("Sign Up Successful!")
             navigate("/")
 
         })

@@ -3,10 +3,12 @@ import { signOut } from 'firebase/auth'
 import { useSiteContext } from '../hooks/useSiteContext'
 import { auth } from '../firebase-config'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { toast } from 'react-toastify'
 
 function NavBar() {
-    const {currentUser, setVisitedSite, setCurrentUser, setSelectedProvince} = useSiteContext()
-    const {dispatch} = useAuthContext()
+    const {setVisitedSite, setSelectedProvince} = useSiteContext()
+
+    const {dispatch, user} = useAuthContext()
 
     const navigate = useNavigate()
 
@@ -17,9 +19,8 @@ function NavBar() {
             // Sign-out successful.
             dispatch({type: "LOGOUT", payload: null})
             setSelectedProvince("All Province / Region")
-            setCurrentUser("")
             setVisitedSite([])
-            console.log("sign out successful");
+            toast.success("Log Out Successful!")
             navigate('/sign-in')
 
           }).catch((error) => {
@@ -37,8 +38,8 @@ function NavBar() {
                 </button>
             </div>
             <div className="navbar-end">
-                {currentUser && <button className ="btn text-xs px-2" onClick={signOutCurrentUser}> Log Out </button>}
-                {!currentUser && <button className ="btn text-xs px-2"> <Link to="/sign-in"> Login / Sign Up</Link> </button>}
+                {user && <button className ="btn text-xs px-2" onClick={signOutCurrentUser}> Log Out </button>}
+                {!user && <button className ="btn text-xs px-2"> <Link to="/sign-in"> Login / Sign Up</Link> </button>}
             </div>
         </div>
     </div>
