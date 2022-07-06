@@ -55,7 +55,7 @@ function SignUpPage() {
     return (
     <div>
         <div className="flex flex-col w-full border-opacity-50">
-            <div className='grid h-32 card rounded-box place-items-center my-3'>
+            <div className='grid h-24 card rounded-box place-items-center'>
                 <button onClick={loginWithGoogleRedirect}>
                     <GoogleButton label="Sign up with Google"/>
                 </button>
