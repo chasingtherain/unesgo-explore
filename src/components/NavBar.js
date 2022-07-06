@@ -1,3 +1,4 @@
+import unescoSiteData from '../unescoSiteData'
 import { Link, useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { useSiteContext } from '../hooks/useSiteContext'
@@ -6,7 +7,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import { toast } from 'react-toastify'
 
 function NavBar() {
-    const {setVisitedSite, setSelectedProvince} = useSiteContext()
+    const {setVisitedSite, setProvinceSite, setSelectedProvince} = useSiteContext()
 
     const {dispatch, user} = useAuthContext()
 
@@ -19,6 +20,7 @@ function NavBar() {
             // Sign-out successful.
             dispatch({type: "LOGOUT", payload: null})
             setSelectedProvince("All Province / Region")
+            setProvinceSite(unescoSiteData.map(site => site))
             setVisitedSite([])
             toast.success("Log Out Successful!")
             navigate('/sign-in')
