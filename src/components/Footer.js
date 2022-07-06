@@ -10,20 +10,19 @@ function Footer() {
     const isKeyboardOpen = useDetectKeyboardOpen();
 
     return (
-    <footer className={(hideFooterAtSiteList) ? "" :"footer footer-center p-2 bg-sky-100 text-base-content fixed inset-x-0 bottom-0"}>
-        {isKeyboardOpen ? 
-            <></>
+        <>
+        {(isKeyboardOpen) ? <></>
             :
-            (<div>
-                {/* hide footer in site path due to overlapping issue */}
-                {
-                    (hideFooterAtSiteList) ? ""
-                    : <p>Copyright © {currentYear} - All right reserved by ChasingTheRain</p>
-                }
-            </div>)
+            (<footer className={(hideFooterAtSiteList) ? "" :"footer footer-center p-2 bg-sky-100 text-base-content fixed inset-x-0 bottom-0"}>
+                    <div>
+                        {/* hide footer in site path due to overlapping issue */}
+                        {(hideFooterAtSiteList) ? "" : <p>Copyright © {currentYear} - All right reserved by ChasingTheRain</p>}
+                    </div>
+            </footer>)
         }
-    </footer>
+        </>
     )
+    
 }
 
 export default Footer
