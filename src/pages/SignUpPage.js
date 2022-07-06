@@ -26,7 +26,9 @@ function SignUpPage() {
         const auth = getAuth();
 
         if(userPassword.length < 6){
-            toast.error("Password needs to be at least 6 characters long!")}
+            toast.error("Password needs to be at least 6 characters long!")
+            setSignUpBtnLoading("")
+        }
         else{
         createUserWithEmailAndPassword(auth, userEmail, userPassword)
         .then((userCredential) => {
@@ -47,7 +49,7 @@ function SignUpPage() {
             const errorCode = error.code;
             setSignUpBtnLoading("")
             if (errorCode === "auth/email-already-in-use") setError("Email already exists! Please log in")
-            else setError("Sign up with a valid email!")
+            else toast.warning("Sign up with a valid email!")
         })}
         
     }
