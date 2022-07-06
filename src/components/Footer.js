@@ -1,21 +1,27 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
+import useDetectKeyboardOpen from 'use-detect-keyboard-open'
 
 function Footer() {
     const location = useLocation()
     const date = new Date()
     const currentYear = date.getFullYear()
-    const hideFooterAtSiteList = location.pathname === "/site" 
+    const hideFooterAtSiteList = location.pathname === "/site"
+    const isKeyboardOpen = useDetectKeyboardOpen();
+
     return (
     <footer className={(hideFooterAtSiteList) ? "" :"footer footer-center p-2 bg-sky-100 text-base-content fixed inset-x-0 bottom-0"}>
-        <div>
-            {/* hide footer in site path due to overlapping issue */}
-            {
-                (hideFooterAtSiteList) ? ""
-                : <p>Copyright © {currentYear} - All right reserved by ChasingTheRain</p>
-            }
-            
-        </div>
+        {isKeyboardOpen ? 
+            <></>
+            :
+            (<div>
+                {/* hide footer in site path due to overlapping issue */}
+                {
+                    (hideFooterAtSiteList) ? ""
+                    : <p>Copyright © {currentYear} - All right reserved by ChasingTheRain</p>
+                }
+            </div>)
+        }
     </footer>
     )
 }
