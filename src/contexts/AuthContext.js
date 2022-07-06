@@ -32,11 +32,18 @@ export const AuthContextProvider = ({children}) => {
         signInWithRedirect(auth, googleProvider);
     }
 
-    useEffect(()=>{
-      const unsub = auth.onAuthStateChanged((user) => {
+    // const current = auth.currentUser;
+    // console.log("current user: ", current);
+
+    useEffect( ()=>{
+        console.log("state = unknown (until the callback is invoked)")  
+        const unsub = auth.onAuthStateChanged((user) => {
+            
             dispatch({type: "AUTH_IS_READY", payload: user})
-            unsub()
-        })
+            if(user) console.log("state = definitely signed in")
+            else console.log("state = definitely signed out")
+        })      
+        unsub()
     },[])
 
     console.log("Authcontext state: ", state.user);

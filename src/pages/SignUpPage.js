@@ -1,6 +1,6 @@
 import React, {useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
 import { db } from "../firebase-config"
 import {toast } from 'react-toastify';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import {GoogleButton} from 'react-google-button'
 import Footer from '../components/Footer'
 import { useAuthContext } from '../hooks/useAuthContext'
-
+import { auth } from '../firebase-config'
 
 function SignUpPage() {
     const {dispatch, googleLoading, loginWithGoogleRedirect} = useAuthContext()
@@ -20,10 +20,10 @@ function SignUpPage() {
     const navigate = useNavigate()
 
 
+
     const signUpWithEmail = async() => {
         setSignUpBtnLoading("loading")
         console.log("signing up with email");
-        const auth = getAuth();
 
         if(userPassword.length < 6){
             toast.error("Password needs to be at least 6 characters long!")
@@ -64,7 +64,7 @@ function SignUpPage() {
                 {/* to be implemented in future */}
                 {/* <button className='btn'> Continue with Facebook </button> */}
             </div>
-            {googleLoading && <button class="btn loading btn-xs btn-outline btn-secondary">Pending Google to respond</button>}
+            {googleLoading && <button className="btn loading btn-xs btn-outline btn-secondary">Pending Google to respond</button>}
             <div className="divider">OR</div>
             <div className="grid h-56 card rounded-box place-items-center">
                 <div className="form-control w-full max-w-xs">

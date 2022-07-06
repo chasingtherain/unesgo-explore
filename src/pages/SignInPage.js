@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {GoogleButton} from "react-google-button"
 import Footer from '../components/Footer';
-import { useSiteContext } from '../hooks/useSiteContext';
 import { auth } from '../firebase-config';
 import { useAuthContext } from '../hooks/useAuthContext';
 
@@ -11,7 +10,6 @@ import { useAuthContext } from '../hooks/useAuthContext';
 function SignInPage() {
     const navigate = useNavigate()
     const {dispatch, googleLoading, loginWithGoogleRedirect} = useAuthContext()
-    const {retrieveProgress} = useSiteContext()
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
     const [error, setError] = useState("")
@@ -24,7 +22,6 @@ function SignInPage() {
             // Signed in 
             const user = userCredential.user;
             dispatch({type: "LOGIN", payload: user})
-            retrieveProgress(user)
             navigate('/')
           })
           .catch((error) => {
@@ -44,7 +41,7 @@ function SignInPage() {
                 {/* to be implemented in future */}
                 {/* <button className='btn' onClick={loginWithFacebookRedirect}> Continue with Facebook </button> */}
             </div>
-            {googleLoading && <button class="btn loading btn-xs btn-outline btn-secondary">Pending Google to respond</button>}
+            {googleLoading && <button className="btn loading btn-xs btn-outline btn-secondary">Pending Google to respond</button>}
             <div className="divider">OR</div>
             <div className="grid h-58 card rounded-box place-items-center my-1">
                 <div className="form-control w-full max-w-xs">
