@@ -2,10 +2,12 @@ import { useSiteContext } from '../../hooks/useSiteContext';
 import { doc, updateDoc } from 'firebase/firestore'
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { db } from '../../firebase-config';
+import { useLocation } from 'react-router-dom';
 
 function TableRow({siteName, siteProvince}) {
     const {visitedSite, setVisitedSite} = useSiteContext()
     const {user} = useAuthContext();
+    const location = useLocation();
 
     const removeSiteFromList = (site) => {
         let removedSiteIndex = visitedSite.indexOf(site)
@@ -15,13 +17,15 @@ function TableRow({siteName, siteProvince}) {
     }
 
     const handleCheck = (event) => {
-        if(visitedSite.includes(event.target.id)) {
-            removeSiteFromList(event.target.id)
-        }
-        else{
-            setVisitedSite(visitedSite.concat(event.target.id))
-            updateUserProgress(visitedSite.concat(event.target.id))
-        }
+        if(location.pathname === "/site"){
+            if(visitedSite.includes(event.target.id)) {
+                removeSiteFromList(event.target.id)
+            }
+            else{
+                setVisitedSite(visitedSite.concat(event.target.id))
+                updateUserProgress(visitedSite.concat(event.target.id))
+            }
+        } 
     }
 
     const checkedStatus = (site) => {
@@ -44,9 +48,14 @@ function TableRow({siteName, siteProvince}) {
             <th className='p-3'>
                 <input id={siteName} type="checkbox" className="checkbox checkbox-primary" onChange={handleCheck} checked={checkedStatus(siteName)}/>
             </th>
-            <td className='whitespace-pre'>
-                <div className="font-bold text-xs"><p>{siteName}</p></div>
-            </td>
+            {
+                (location.pathname === "/site") ? 
+                    (<td className='whitespace-pre'>
+                    <div className="font-bold text-xs"><p>{siteName}</p></div>
+                </td>)
+                : <></>
+            }
+
             <td>
                 {siteProvince}
             </td>

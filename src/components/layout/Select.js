@@ -3,8 +3,7 @@ import { useSiteContext } from '../../hooks/useSiteContext'
 
 
 function Select() {
-  const provinceData = ["All Province / Region","Anhui","Beijing",  "Chongqing",  "Fujian",  "Gansu",  "Guangdong",  "Guangxi",  "Guizhou",  "Hainan",  "Hebei",  "Heilongjiang",  "Henan",  "Hong Kong",  "Hubei",  "Hunan",  "Inner Mongolia",  "Jiangsu",  "Jiangxi",  "Jilin",  "Liaoning",  "Macau",  "Ningxia",  "Qinghai",  "Shaanxi",  "Shandong",  "Shanghai",  "Shanxi",  "Sichuan",  "Tianjin","Tibet",  "Xinjiang","Yunnan","Zhejiang"]
-  const {setProvinceSite,setSelectedProvince} = useSiteContext()
+  const {provinceData, setProvinceSite,setSelectedProvince} = useSiteContext()
 
   const handleSelectProvince = (event) => {
     setSelectedProvince(event.target.value);
