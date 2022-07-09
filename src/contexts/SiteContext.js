@@ -13,9 +13,11 @@ const SiteContext = createContext()
 export const SiteContextProvider = ({children}) => {
     const provinceData = ["All Province / Region","Anhui","Beijing",  "Chongqing",  "Fujian",  "Gansu",  "Guangdong",  "Guangxi",  "Guizhou",  "Hainan", "Hebei",  "Heilongjiang",  "Henan",  "Hong Kong",  "Hubei",  "Hunan",  "Inner Mongolia",  "Jiangsu",  "Jiangxi",  "Jilin",  "Liaoning",  "Macau",  "Ningxia",  "Qinghai",  "Shaanxi",  "Shandong",  "Shanghai",  "Shanxi",  "Sichuan", "Taiwan", "Tianjin","Tibet",  "Xinjiang","Yunnan","Zhejiang"]
     const provinceList = ["Anhui","Beijing",  "Chongqing",  "Fujian",  "Gansu",  "Guangdong",  "Guangxi",  "Guizhou",  "Hainan", "Hebei",  "Heilongjiang",  "Henan",  "Hong Kong",  "Hubei",  "Hunan",  "Inner Mongolia",  "Jiangsu",  "Jiangxi",  "Jilin",  "Liaoning",  "Macau",  "Ningxia",  "Qinghai",  "Shaanxi",  "Shandong",  "Shanghai",  "Shanxi",  "Sichuan", "Taiwan", "Tianjin","Tibet",  "Xinjiang","Yunnan","Zhejiang"]
+    
     const [selectedProvince, setSelectedProvince] = useState("All Province / Region")
     const [provinceSite, setProvinceSite] = useState((unescoSiteData.map(site => site)))
     const [visitedSite, setVisitedSite] = useState([])
+    const [visitedProvinceList, setVisitedProvinceList] = useState([])
     const totalNumOfLocalSites = provinceSite.length
     
     // const provider = new GoogleAuthProvider();
@@ -44,8 +46,10 @@ export const SiteContextProvider = ({children}) => {
     const retrieveProgress = async (user) => {
         const docRef =  doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
-        const userProgress = docSnap.data().progress
-        setVisitedSite(userProgress)
+        const userUnescoProgress = docSnap.data().progress
+        const userProvinceListProgress = docSnap.data().provinceListProgress
+        setVisitedSite(userUnescoProgress)
+        setVisitedProvinceList(userProvinceListProgress)
     }
 
     const userNotInDb = async (user) => {
@@ -59,7 +63,8 @@ export const SiteContextProvider = ({children}) => {
             const newUser = {
                 email: user.email,
                 timestamp: new Date(),
-                progress: []
+                progress: [],
+                provinceListProgress: [],
             }
             setDoc(doc(db, "users", user.uid), newUser);
             console.log("new user data added to db");
@@ -76,6 +81,7 @@ export const SiteContextProvider = ({children}) => {
         userPassword,
         totalNumOfLocalSites,
         visitedSite,
+        visitedProvinceList,
         // loginWithGoogleRedirect,
         retrieveProgress,
         setProvinceSite,
@@ -85,6 +91,7 @@ export const SiteContextProvider = ({children}) => {
         getPasswordInput,
         setUserEmail,
         setUserPassword,
+        setVisitedProvinceList,
     }}>
         {children}
     </SiteContext.Provider>

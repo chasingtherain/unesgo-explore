@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 function Table() {
     const {provinceList, provinceSite} = useSiteContext()
     const location = useLocation()
-    console.log(location.pathname);
     return (
     <div>
         <div className="grid place-items-center overflow-x-auto">
@@ -18,6 +17,7 @@ function Table() {
                     <input type="checkbox" className="checkbox" disabled={true} />
                     </label>
                 </th>
+                {/* hides site column for  */}
                 {(location.pathname === "/site") ? <th>Site Name</th> : <></>}
                 <th>Province / Region</th>
                 </tr>

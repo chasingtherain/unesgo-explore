@@ -5,61 +5,107 @@ import { db } from '../../firebase-config';
 import { useLocation } from 'react-router-dom';
 
 function TableRow({siteName, siteProvince}) {
-    const {visitedSite, setVisitedSite} = useSiteContext()
+    const {visitedSite, setVisitedSite, visitedProvinceList, setVisitedProvinceList} = useSiteContext()
     const {user} = useAuthContext();
     const location = useLocation();
 
     const removeSiteFromList = (site) => {
-        let removedSiteIndex = visitedSite.indexOf(site)
-        let tempVisitedSite = visitedSite.slice(0,removedSiteIndex).concat(visitedSite.slice(removedSiteIndex+1))
-        setVisitedSite(tempVisitedSite)
-        updateUserProgress(tempVisitedSite)
+        if(location.pathname === "/site"){
+            let removedSiteIndex = visitedSite.indexOf(site)
+            let tempVisitedSite = visitedSite.slice(0,removedSiteIndex).concat(visitedSite.slice(removedSiteIndex+1))
+            setVisitedSite(tempVisitedSite)
+            updateUserProgress(tempVisitedSite)
+        }
+        if(location.pathname === "/province-list"){
+            let removedProvinceIndex = visitedProvinceList.indexOf(site)
+            let tempVisitedProvinceList = visitedProvinceList.slice(0,removedProvinceIndex).concat(visitedProvinceList.slice(removedProvinceIndex+1))
+            setVisitedProvinceList(tempVisitedProvinceList)
+            updateUserProgress(tempVisitedProvinceList)
+        }
     }
 
     const handleCheck = (event) => {
+        console.log(event);
         if(location.pathname === "/site"){
             if(visitedSite.includes(event.target.id)) {
                 removeSiteFromList(event.target.id)
             }
             else{
+                console.log("unesco data", event.target.id);
                 setVisitedSite(visitedSite.concat(event.target.id))
                 updateUserProgress(visitedSite.concat(event.target.id))
+            }
+        } 
+        if(location.pathname === "/province-list"){
+            if(visitedProvinceList.includes(event.target.id)) {
+                removeSiteFromList(event.target.id)
+            }
+            else{
+                console.log("trying to add province data", event.target.id);
+                setVisitedProvinceList(visitedProvinceList.concat(event.target.id))
+                updateUserProgress(visitedProvinceList.concat(event.target.id))
             }
         } 
     }
 
     const checkedStatus = (site) => {
-        if(visitedSite.includes(site)) return "checked"
-        return ""
+        if(location.pathname === "/site"){
+            if(visitedSite.includes(site)) return "checked"
+            // console.log("unchecking");
+            return ""
+        }
+        if(location.pathname === "/province-list"){
+            console.log("visitedProvinceList: ", visitedProvinceList);
+            if(visitedProvinceList.includes(site)) return "checked"
+            // console.log("unchecking");
+            return ""
+        }
     }
-
     // update user progress
-    const updateUserProgress = (visitedSiteList) => {
-        const docRef = doc(db, "users", user.uid);        
-                    // To update progress
-                    updateDoc(docRef, {
-                        "progress": visitedSiteList
-                    });
-                    console.log("user logged in, new data added!");
+    const updateUserProgress = (checkedItem) => {
+        if(location.pathname === "/site" && user){
+            const docRef = doc(db, "users", user.uid)    
+            // To update progress
+            updateDoc(docRef, {
+                "progress": checkedItem
+            });
+            console.log("user logged in, new data added to unesco list!");
+        }
+        if(location.pathname === "/province-list" && user){
+            const docRef = doc(db, "users", user.uid)    
+            // To update progress
+            updateDoc(docRef, {
+                "provinceListProgress": checkedItem
+            });
+            console.log("user logged in, new data added to province list!");
+        }
+
     }
 
     return (
-        <tr>
-            <th className='p-3'>
-                <input id={siteName} type="checkbox" className="checkbox checkbox-primary" onChange={handleCheck} checked={checkedStatus(siteName)}/>
-            </th>
-            {
-                (location.pathname === "/site") ? 
-                    (<td className='whitespace-pre'>
-                    <div className="font-bold text-xs"><p>{siteName}</p></div>
-                </td>)
-                : <></>
-            }
+        <>
+        {
+        (location.pathname === "/site") ?
+            (<tr>
+                <th className='p-3'>
+                    <input id={siteName} type="checkbox" className="checkbox checkbox-primary" onChange={handleCheck} checked={checkedStatus(siteName)}/>
+                </th>
+                <td className='whitespace-pre'>
+                        <div className="font-bold text-xs"><p>{siteName}</p></div>
+                </td>
 
-            <td>
-                {siteProvince}
-            </td>
-        </tr>
+                <td>{siteProvince}</td>
+            </tr>) : <></>
+        }
+        {(location.pathname === "/province-list") ?
+            (<tr>
+                <th className='p-3'>
+                    <input id={siteProvince} type="checkbox" className="checkbox checkbox-primary" onChange={handleCheck} checked={checkedStatus(siteProvince)}/>
+                </th>
+                <td>{siteProvince}</td>
+            </tr>) : <></>
+        }
+        </>
     )
 }
 

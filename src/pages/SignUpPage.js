@@ -38,7 +38,8 @@ function SignUpPage() {
             const newUser = {
                 email: user.email,
                 timestamp: new Date(),
-                progress: []
+                progress: [],
+                provinceListProgress: [],
             }
             setDoc(doc(db, "users", user.uid), newUser);
             toast("Sign Up Successful!")
