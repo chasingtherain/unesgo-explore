@@ -38,7 +38,7 @@ function SignUpPage() {
             const newUser = {
                 email: user.email,
                 timestamp: new Date(),
-                progress: [],
+                unescoListProgress: [],
                 provinceListProgress: [],
             }
             setDoc(doc(db, "users", user.uid), newUser);

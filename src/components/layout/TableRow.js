@@ -56,7 +56,7 @@ function TableRow({siteName, siteProvince}) {
         }
         if(location.pathname === "/province-list"){
             console.log("visitedProvinceList: ", visitedProvinceList);
-            if(visitedProvinceList.includes(site)) return "checked"
+            if(site && visitedProvinceList.includes(site)) return "checked"
             // console.log("unchecking");
             return ""
         }
@@ -67,7 +67,7 @@ function TableRow({siteName, siteProvince}) {
             const docRef = doc(db, "users", user.uid)    
             // To update progress
             updateDoc(docRef, {
-                "progress": checkedItem
+                "unescoListProgress": checkedItem
             });
             console.log("user logged in, new data added to unesco list!");
         }

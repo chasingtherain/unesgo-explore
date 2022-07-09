@@ -4,7 +4,7 @@ import { auth, db } from '../firebase-config';
 import { onAuthStateChanged } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import 'react-toastify/dist/ReactToastify.css'
-
+import { collection, getDocs } from "firebase/firestore";
 
 const SiteContext = createContext()
 
@@ -25,8 +25,7 @@ export const SiteContextProvider = ({children}) => {
     const [userPassword, setUserPassword] = useState("")
     const getEmailInput = (event) => {setUserEmail(event.target.value);}
     const getPasswordInput = (event) => { setUserPassword(event.target.value);}    
-
-
+    
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth,(user)=>{
             if(user){
@@ -40,16 +39,13 @@ export const SiteContextProvider = ({children}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     
-
-    
     // fetch user progress if user is logged in
     const retrieveProgress = async (user) => {
         const docRef =  doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
-        const userUnescoProgress = docSnap.data().progress
-        const userProvinceListProgress = docSnap.data().provinceListProgress
-        setVisitedSite(userUnescoProgress)
-        setVisitedProvinceList(userProvinceListProgress)
+        console.log(docSnap.data());
+        setVisitedSite(docSnap.data().unescoListProgress)
+        setVisitedProvinceList(docSnap.data().provinceListProgress)
     }
 
     const userNotInDb = async (user) => {
@@ -63,7 +59,7 @@ export const SiteContextProvider = ({children}) => {
             const newUser = {
                 email: user.email,
                 timestamp: new Date(),
-                progress: [],
+                unescoListProgress: [],
                 provinceListProgress: [],
             }
             setDoc(doc(db, "users", user.uid), newUser);
