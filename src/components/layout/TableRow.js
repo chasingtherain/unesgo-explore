@@ -55,7 +55,6 @@ function TableRow({siteName, siteProvince}) {
             return ""
         }
         if(location.pathname === "/province-list"){
-            console.log("visitedProvinceList: ", visitedProvinceList);
             if(site && visitedProvinceList.includes(site)) return "checked"
             // console.log("unchecking");
             return ""
@@ -102,7 +101,7 @@ function TableRow({siteName, siteProvince}) {
                 <th className='p-3'>
                     <input id={siteProvince} type="checkbox" className="checkbox checkbox-primary" onChange={handleCheck} checked={checkedStatus(siteProvince)}/>
                 </th>
-                <td>{siteProvince}</td>
+                <td className='text-lg pl-5 pr-20'>{siteProvince}</td>
             </tr>) : <></>
         }
         </>

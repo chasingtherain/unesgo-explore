@@ -7,7 +7,7 @@ function Table() {
     const location = useLocation()
     return (
     <div>
-        <div className="grid place-items-center overflow-x-auto">
+        <div className="grid place-items-center overflow-x-scroll">
             <table className="table w-1/2">
             {/* <!-- head --> */}
             <thead>
@@ -19,10 +19,11 @@ function Table() {
                 </th>
                 {/* hides site column for  */}
                 {(location.pathname === "/site") ? <th>Site Name</th> : <></>}
-                <th>Province / Region</th>
+                
+                <th>Region</th>
                 </tr>
             </thead>
-            <tbody className="whitespace-pre">
+            <tbody className="whitespace-pre text-xs">
                 {/* <!-- row 1 --> */}
                 {
                     (location.pathname === "/site") ?

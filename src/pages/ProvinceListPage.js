@@ -15,7 +15,7 @@ export default function ProvinceListPage() {
           <ProvinceListStats/>
         </div>
         {/* show button only if user is logged in */}
-        {user && (<button className="btn btn-secondary text-sm btn-sm my-2">
+        {user && (<button className="btn btn-secondary text-md btn-sm my-1 sm: text-xs">
             <Link to="/site">View UNESCO Sites</Link>
         </button>)}
         <div className='mb-4'><Alert/></div>
