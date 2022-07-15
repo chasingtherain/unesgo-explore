@@ -12,6 +12,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import LandingPage from "./pages/LandingPage";
 import ProvinceListPage from "./pages/ProvinceListPage";
 
+
 function App() {
     const {authIsReady} = useAuthContext()
 

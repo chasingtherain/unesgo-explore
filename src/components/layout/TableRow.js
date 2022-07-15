@@ -87,7 +87,7 @@ function TableRow({siteName, siteProvince}) {
         (location.pathname === "/site") ?
             (<tr>
                 <th className='p-3'>
-                    <input id={siteName} type="checkbox" className="checkbox checkbox-primary" onChange={handleCheck} checked={checkedStatus(siteName)}/>
+                    <input id={siteName} type="checkbox" data-testid="checkbox-element" className="checkbox checkbox-primary" onChange={handleCheck} checked={checkedStatus(siteName)}/>
                 </th>
                 <td className='whitespace-pre'>
                         <div className="font-bold text-xs"><p>{siteName}</p></div>
