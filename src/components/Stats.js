@@ -9,7 +9,7 @@ function Stats() {
   const remainingLocalSites = totalNumOfLocalSites-countLocalSitesVisited
 
   return (
-    <div className="stats shadow flex flex-end mb-6 border-2 border-sky-500 mr-2 sm: mx-5">        
+    <div className="stats shadow flex flex-end mb-6 border-2 border-sky-500 mr-4 sm: mx-2">        
         <div className="stat">
             <div className="stat-title">Progress</div>
             <div className="stat-value">{Math.ceil(totalVisitedSiteCount/totalNumOfNationalSites*100)}%</div>

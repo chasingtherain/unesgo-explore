@@ -38,7 +38,8 @@ function SignUpPage() {
             const newUser = {
                 email: user.email,
                 timestamp: new Date(),
-                progress: []
+                unescoListProgress: [],
+                provinceListProgress: [],
             }
             setDoc(doc(db, "users", user.uid), newUser);
             toast("Sign Up Successful!")
@@ -47,6 +48,7 @@ function SignUpPage() {
         })
         .catch((error) => {
             const errorCode = error.code;
+            console.log(errorCode)
             setSignUpBtnLoading("")
             if (errorCode === "auth/email-already-in-use") setError("Email already exists! Please log in")
             else toast.warning("Sign up with a valid email!")

@@ -7,3 +7,4 @@ takeaways:
 4) understood how to work with async functions
 5) made use and understood the importance of private routes
 6) made use of .env.local and understood its importance in concealing sensitive data
+7) working extensively with useEffect, onAuthStateChanged etc
