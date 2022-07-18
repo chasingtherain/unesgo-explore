@@ -1,4 +1,3 @@
-import { screen } from '@testing-library/react'
 import NavBar from '../components/NavBar'
 import { render } from '../test-utils/testing-library-utils'
 

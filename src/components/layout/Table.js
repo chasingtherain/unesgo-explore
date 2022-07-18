@@ -27,8 +27,8 @@ function Table() {
                 {/* <!-- row 1 --> */}
                 {
                     (location.pathname === "/site") ?
-                    provinceSite.map((site,index) =>  <TableRow key={index} siteName={site.name} siteProvince={site.admin_region}/>)
-                    : provinceList.map((site,index) =>  <TableRow key={index} siteProvince={site}/>)
+                    provinceSite.map((site,index) =>  <TableRow data-testid="foo" key={index} siteName={site.name} siteProvince={site.admin_region}/>)
+                    : provinceList.map((site,index) =>  <TableRow data-testid="foo" key={index} siteProvince={site}/>)
                 
                 }
             </tbody>    

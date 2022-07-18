@@ -48,6 +48,7 @@ function SignUpPage() {
         })
         .catch((error) => {
             const errorCode = error.code;
+            console.log(errorCode)
             setSignUpBtnLoading("")
             if (errorCode === "auth/email-already-in-use") setError("Email already exists! Please log in")
             else toast.warning("Sign up with a valid email!")
