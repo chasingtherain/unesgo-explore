@@ -11,10 +11,6 @@ describe("Checkbox is loaded in default state in document", () =>{
         // eslint-disable-next-line testing-library/no-render-in-setup
         render(<Table/>)
     })
-    test("The checkbox should be in the document", async ()=>{
-        const checkBoxes = await screen.findAllByTestId(/foo/i)
-        expect(checkBoxes).toHaveLength(5)
-    })
     test("The checkbox should be unchecked by default", ()=>{})
 })
 

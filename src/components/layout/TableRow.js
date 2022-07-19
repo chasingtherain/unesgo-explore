@@ -4,7 +4,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { db } from '../../firebase-config';
 import { useLocation } from 'react-router-dom';
 
-function TableRow({siteName, siteProvince}) {
+function TableRow({siteName, siteRegion}) {
     const {visitedSite, setVisitedSite, visitedProvinceList, setVisitedProvinceList} = useSiteContext()
     const {user} = useAuthContext();
     const location = useLocation();
@@ -84,7 +84,7 @@ function TableRow({siteName, siteProvince}) {
     return (
         <>
         {
-        (location.pathname === "/site") ?
+        (location.pathname !== "/province-list") ?
             (<tr>
                 <th className='p-3'>
                     <input id={siteName} type="checkbox" data-testid="checkbox-element" className="checkbox checkbox-primary" onChange={handleCheck} checked={checkedStatus(siteName)}/>
@@ -93,15 +93,15 @@ function TableRow({siteName, siteProvince}) {
                         <div className="font-bold text-xs"><p>{siteName}</p></div>
                 </td>
 
-                <td>{siteProvince}</td>
+                <td>{siteRegion}</td>
             </tr>) : <></>
         }
         {(location.pathname === "/province-list") ?
             (<tr>
                 <th className='p-3'>
-                    <input id={siteProvince} type="checkbox" className="checkbox checkbox-primary" onChange={handleCheck} checked={checkedStatus(siteProvince)}/>
+                    <input id={siteRegion} type="checkbox" className="checkbox checkbox-primary" onChange={handleCheck} checked={checkedStatus(siteRegion)}/>
                 </th>
-                <td className='text-lg pl-5 pr-20'>{siteProvince}</td>
+                <td className='text-lg pl-5 pr-20'>{siteRegion}</td>
             </tr>) : <></>
         }
         </>

@@ -1,4 +1,4 @@
-import unescoSiteData from '../unescoSiteData'
+import unescoSiteData from '../data/chinaUnescoSiteData'
 import { Link, useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { useSiteContext } from '../hooks/useSiteContext'

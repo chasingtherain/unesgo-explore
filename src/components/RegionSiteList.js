@@ -14,18 +14,13 @@ function CountrySiteList() {
       <div>
         <div className='flex flex-col justify-center items-center sm: flex flex-col'>
         {/* <div className='flex flex-wrap justify-between sm: flex flex-col justify-center items-center'> */}
-          <Select/>
-          <Stats/>
+          {/* <Select/> */}
+          {/* <Stats/> */}
         </div>
         {/* <div className='flex flex-col justify-center items-center'> */}
         <div className='flex flex-col justify-center items-center sm: flex flex-wrap justify-between'>
-          {user && (<button className="btn btn-secondary text-sm btn-sm -my-2">
-              <Link to="/province-list">View Province List</Link>
-          </button>)}
-                  <div className='mb-8'><Alert/></div>
-                  {(totalNumOfLocalSites) ? <Table name="Site Name" region="Region"/>
-                    : <h3 className='text-xl grid place-items-center'>No UNESCO site in <strong>{selectedProvince}</strong></h3>
-                  }
+            <div className='mb-8'><Alert/></div>
+                <Table name="Site Name" region="Country"/>
           </div>
         </div>
     </div>

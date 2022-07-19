@@ -32,7 +32,7 @@ describe("/site loads all components", ()=> {
     test("Table is loaded when there is data", ()=>{
         // const trElements = await screen.findAllByRole("row")
         expect(screen.getByRole("table")).toBeInTheDocument()
-        expect(screen.getByRole("row", {name: /region/i})).toBeInTheDocument()
+        expect(screen.getByRole("row", {name: /province/i})).toBeInTheDocument()
         // expect(trElements.length).toBe(2)
 
         // 56 items if dropdown selection is All Province / Region

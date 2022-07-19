@@ -11,6 +11,7 @@ import Spinner from "./components/Spinner";
 import PrivateRoute from "./components/PrivateRoute";
 import LandingPage from "./pages/LandingPage";
 import ProvinceListPage from "./pages/ProvinceListPage";
+import RegionSiteList from "./components/RegionSiteList"
 import RegionPage from "./pages/RegionPage";
 
 
@@ -26,7 +27,7 @@ function App() {
                   <Route exact path = '/' element={<LandingPage/>}/>
                   <Route exact path = '/site' element={<CountrySiteList/>}/>
                   <Route exact path = '/east-asia' element={<RegionPage/>}/>
-                  <Route exact path = '/southeast-asia' element={<RegionPage/>}/>
+                  <Route exact path = '/southeast-asia' element={<RegionSiteList/>}/>
                   <Route exact path = '/province-list' element={<ProvinceListPage/>}/>
                   <Route path = '/sign-in' element={<PrivateRoute/>}>
                     <Route path = '/sign-in' element={<SignInPage/>}/>

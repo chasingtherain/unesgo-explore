@@ -1,10 +1,24 @@
 import TableRow from "./TableRow"
 import { useSiteContext } from "../../hooks/useSiteContext";
 import { useLocation } from "react-router-dom";
+import seaUnescoSiteData from "../../data/seaUnescoSiteData"
 
-function Table() {
+function Table({name, region}) {
     const {provinceList, provinceSite} = useSiteContext()
     const location = useLocation()
+    const tableData = (sitePath) => {
+        switch(sitePath) {
+            case "/province-list":
+                return provinceList.map((site,index) =>  <TableRow data-testid="foo" key={index} siteRegion={site}/>)
+            case "/site":
+                return provinceSite.map((site,index) =>  <TableRow data-testid="foo" key={index} siteName={site.name} siteRegion={site.admin_region}/>)
+            case "/southeast-asia":
+                return seaUnescoSiteData.map((site,index) =>  <TableRow data-testid="foo" key={index} siteName={site.name} siteRegion={site.country}/>)
+            default:
+                return <p>error encountered</p>
+          }
+    }
+
     return (
     <div>
         <div className="grid place-items-center overflow-x-scroll">
@@ -18,18 +32,21 @@ function Table() {
                     </label>
                 </th>
                 {/* hides site column for  */}
-                {(location.pathname === "/site") ? <th>Site Name</th> : <></>}
+                {(location.pathname !== "/province-list") ? <th>{name}</th> : <></>}
                 
-                <th>Region</th>
+                <th>{region}</th>
                 </tr>
             </thead>
             <tbody className="whitespace-pre text-xs">
                 {/* <!-- row 1 --> */}
-                {
+                {/* {
                     (location.pathname === "/site") ?
-                    provinceSite.map((site,index) =>  <TableRow data-testid="foo" key={index} siteName={site.name} siteProvince={site.admin_region}/>)
-                    : provinceList.map((site,index) =>  <TableRow data-testid="foo" key={index} siteProvince={site}/>)
+                    provinceSite.map((site,index) =>  <TableRow data-testid="foo" key={index} siteName={site.name} siteRegion={site.admin_region}/>)
+                    : provinceList.map((site,index) =>  <TableRow data-testid="foo" key={index} siteRegion={site}/>)
                 
+                } */}
+                {
+                    tableData(location.pathname)
                 }
             </tbody>    
             </table>

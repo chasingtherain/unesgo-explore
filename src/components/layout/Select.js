@@ -1,4 +1,4 @@
-import unescoSiteData from '../../unescoSiteData'
+import unescoSiteData from '../../data/chinaUnescoSiteData'
 import { useSiteContext } from '../../hooks/useSiteContext'
 
 

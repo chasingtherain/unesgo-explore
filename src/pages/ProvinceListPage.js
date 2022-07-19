@@ -19,7 +19,7 @@ export default function ProvinceListPage() {
             <Link to="/site">View UNESCO Sites</Link>
         </button>)}
         <div className='mb-4'><Alert/></div>
-        <Table/>
+        <Table region="Province"/>
       </div>
     </div>
     )
