@@ -53,10 +53,7 @@ export const SiteContextProvider = ({children}) => {
     const userNotInDb = async (user) => {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            // console.log("Document already exist! user data:", docSnap.data());
-        } 
-        else {
+        if (!docSnap.exists()) {
             console.log("No such document!");
             const newUser = {
                 email: user.email,

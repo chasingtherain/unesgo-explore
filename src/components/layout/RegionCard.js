@@ -9,7 +9,7 @@ function RegionCard({name}) {
     return (
     <div className="card card-compact w-72 bg-base-100 shadow-xl border-2 my-3">
         <div className="card-body text-center items-center">
-            <p className='text-4xl mb-3'>{name}</p>
+            <p className='text-3xl mb-2'>{name}</p>
             <div className="card-actions">
                 <button className="btn btn-primary">
                     <Link to={`/${regionPathName}`} >View UNESCO Sites</Link>

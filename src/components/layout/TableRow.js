@@ -35,14 +35,12 @@ function TableRow({siteName, siteRegion}) {
     }
 
     const handleCheck = (event) => {
-        console.log(event);
         switch(location.pathname) {
             case "/site":
                 if(chinaVisitedSite.includes(event.target.id)) {
                     removeSiteFromList(event.target.id)
                 }
                 else{
-                    console.log("unesco data", event.target.id);
                     setChinaVisitedSite(chinaVisitedSite.concat(event.target.id))
                     updateUserProgress(chinaVisitedSite.concat(event.target.id))
                 }
@@ -52,7 +50,6 @@ function TableRow({siteName, siteRegion}) {
                     removeSiteFromList(event.target.id)
                 }
                 else{
-                    console.log("unesco data", event.target.id);
                     setSeaVisitedSite(seaVisitedSite.concat(event.target.id))
                     updateUserProgress(seaVisitedSite.concat(event.target.id))
                 }

@@ -27,7 +27,7 @@ function App() {
                   <Route exact path = '/' element={<LandingPage/>}/>
                   <Route exact path = '/site' element={<CountrySiteList/>}/>
                   <Route exact path = '/east-asia' element={<RegionPage/>}/>
-                  <Route exact path = '/southeast-asia' element={<RegionSiteList/>}/>
+                  <Route exact path = '/southeast-asia' element={<RegionSiteList region="Southeast Asia"/>}/>
                   <Route exact path = '/province-list' element={<ProvinceListPage/>}/>
                   <Route path = '/sign-in' element={<PrivateRoute/>}>
                     <Route path = '/sign-in' element={<SignInPage/>}/>

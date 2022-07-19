@@ -32,9 +32,6 @@ export const AuthContextProvider = ({children}) => {
         signInWithRedirect(auth, googleProvider);
     }
 
-    // const current = auth.currentUser;
-    // console.log("current user: ", current);
-
     useEffect( ()=>{
         console.log("state = unknown (until the callback is invoked)")  
         const unsub = auth.onAuthStateChanged((user) => {
