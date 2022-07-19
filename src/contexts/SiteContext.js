@@ -16,7 +16,8 @@ export const SiteContextProvider = ({children}) => {
     
     const [selectedProvince, setSelectedProvince] = useState("All Province / Region")
     const [provinceSite, setProvinceSite] = useState((unescoSiteData.map(site => site)))
-    const [visitedSite, setVisitedSite] = useState([])
+    const [chinaVisitedSite, setChinaVisitedSite] = useState([])
+    const [seaVisitedSite, setSeaVisitedSite] = useState([])
     const [visitedProvinceList, setVisitedProvinceList] = useState([])
     const totalNumOfLocalSites = provinceSite.length
     
@@ -43,9 +44,10 @@ export const SiteContextProvider = ({children}) => {
     const retrieveProgress = async (user) => {
         const docRef =  doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
-        console.log(docSnap.data());
-        setVisitedSite(docSnap.data().unescoListProgress)
+        setChinaVisitedSite(docSnap.data().unescoListProgress)
         setVisitedProvinceList(docSnap.data().provinceListProgress)
+        if(docSnap.data().seaUnescoProgress === undefined){setDoc(docRef, {"seaUnescoProgress": []},{merge: true})}
+        else setSeaVisitedSite(docSnap.data().seaUnescoProgress)
     }
 
     const userNotInDb = async (user) => {
@@ -61,6 +63,7 @@ export const SiteContextProvider = ({children}) => {
                 timestamp: new Date(),
                 unescoListProgress: [],
                 provinceListProgress: [],
+                seaUnescoProgress: [],
             }
             setDoc(doc(db, "users", user.uid), newUser);
             console.log("new user data added to db");
@@ -76,17 +79,19 @@ export const SiteContextProvider = ({children}) => {
         userEmail,
         userPassword,
         totalNumOfLocalSites,
-        visitedSite,
+        chinaVisitedSite,
+        seaVisitedSite,
         visitedProvinceList,
         // loginWithGoogleRedirect,
         retrieveProgress,
         setProvinceSite,
         setSelectedProvince,
-        setVisitedSite,
+        setChinaVisitedSite,
         getEmailInput,
         getPasswordInput,
         setUserEmail,
         setUserPassword,
+        setSeaVisitedSite,
         setVisitedProvinceList,
     }}>
         {children}

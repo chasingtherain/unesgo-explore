@@ -5,80 +5,108 @@ import { db } from '../../firebase-config';
 import { useLocation } from 'react-router-dom';
 
 function TableRow({siteName, siteRegion}) {
-    const {visitedSite, setVisitedSite, visitedProvinceList, setVisitedProvinceList} = useSiteContext()
+    const {chinaVisitedSite, setChinaVisitedSite, seaVisitedSite, setSeaVisitedSite, visitedProvinceList, setVisitedProvinceList} = useSiteContext()
     const {user} = useAuthContext();
     const location = useLocation();
 
     const removeSiteFromList = (site) => {
-        if(location.pathname === "/site"){
-            let removedSiteIndex = visitedSite.indexOf(site)
-            let tempVisitedSite = visitedSite.slice(0,removedSiteIndex).concat(visitedSite.slice(removedSiteIndex+1))
-            setVisitedSite(tempVisitedSite)
-            updateUserProgress(tempVisitedSite)
-        }
-        if(location.pathname === "/province-list"){
-            let removedProvinceIndex = visitedProvinceList.indexOf(site)
-            let tempVisitedProvinceList = visitedProvinceList.slice(0,removedProvinceIndex).concat(visitedProvinceList.slice(removedProvinceIndex+1))
-            setVisitedProvinceList(tempVisitedProvinceList)
-            updateUserProgress(tempVisitedProvinceList)
+        switch(location.pathname) {
+            case "/site":
+                let removedChinaSiteIndex = chinaVisitedSite.indexOf(site)
+                let tempChinaVisitedSite = chinaVisitedSite.slice(0,removedChinaSiteIndex).concat(chinaVisitedSite.slice(removedChinaSiteIndex+1))
+                setChinaVisitedSite(tempChinaVisitedSite)
+                updateUserProgress(tempChinaVisitedSite)
+                break;
+            case "/southeast-asia":
+                let removedSeaSiteIndex = seaVisitedSite.indexOf(site)
+                let tempSeaVisitedSite = seaVisitedSite.slice(0,removedSeaSiteIndex).concat(seaVisitedSite.slice(removedSeaSiteIndex+1))
+                setSeaVisitedSite(tempSeaVisitedSite)
+                updateUserProgress(tempSeaVisitedSite)
+                break;
+            case "/province-list":
+                let removedProvinceIndex = visitedProvinceList.indexOf(site)
+                let tempVisitedProvinceList = visitedProvinceList.slice(0,removedProvinceIndex).concat(visitedProvinceList.slice(removedProvinceIndex+1))
+                setVisitedProvinceList(tempVisitedProvinceList)
+                updateUserProgress(tempVisitedProvinceList)
+                break;
+            default:
+                throw new Error("invalid path name")
         }
     }
 
     const handleCheck = (event) => {
         console.log(event);
-        if(location.pathname === "/site"){
-            if(visitedSite.includes(event.target.id)) {
-                removeSiteFromList(event.target.id)
-            }
-            else{
-                console.log("unesco data", event.target.id);
-                setVisitedSite(visitedSite.concat(event.target.id))
-                updateUserProgress(visitedSite.concat(event.target.id))
-            }
-        } 
-        if(location.pathname === "/province-list"){
-            if(visitedProvinceList.includes(event.target.id)) {
-                removeSiteFromList(event.target.id)
-            }
-            else{
-                console.log("trying to add province data", event.target.id);
-                setVisitedProvinceList(visitedProvinceList.concat(event.target.id))
-                updateUserProgress(visitedProvinceList.concat(event.target.id))
-            }
-        } 
+        switch(location.pathname) {
+            case "/site":
+                if(chinaVisitedSite.includes(event.target.id)) {
+                    removeSiteFromList(event.target.id)
+                }
+                else{
+                    console.log("unesco data", event.target.id);
+                    setChinaVisitedSite(chinaVisitedSite.concat(event.target.id))
+                    updateUserProgress(chinaVisitedSite.concat(event.target.id))
+                }
+                break;
+            case "/southeast-asia":
+                if(seaVisitedSite.includes(event.target.id)) {
+                    removeSiteFromList(event.target.id)
+                }
+                else{
+                    console.log("unesco data", event.target.id);
+                    setSeaVisitedSite(seaVisitedSite.concat(event.target.id))
+                    updateUserProgress(seaVisitedSite.concat(event.target.id))
+                }
+                break;
+            case "/province-list":
+                if(visitedProvinceList.includes(event.target.id)) {
+                    removeSiteFromList(event.target.id)
+                }
+                else{
+                    console.log("trying to add province data", event.target.id);
+                    setVisitedProvinceList(visitedProvinceList.concat(event.target.id))
+                    updateUserProgress(visitedProvinceList.concat(event.target.id))
+                }
+                break;
+            default:
+                throw new Error("invalid path name")
+        }
     }
 
     const checkedStatus = (site) => {
-        if(location.pathname === "/site"){
-            if(visitedSite.includes(site)) return "checked"
-            // console.log("unchecking");
-            return ""
-        }
-        if(location.pathname === "/province-list"){
-            if(site && visitedProvinceList.includes(site)) return "checked"
-            // console.log("unchecking");
-            return ""
+        switch(location.pathname){
+            case "/site":
+                if(chinaVisitedSite.includes(site)) return "checked"
+                return ""
+            case "/southeast-asia":
+                if(seaVisitedSite.includes(site)) return "checked"
+                return ""
+            case "/province-list":
+                if(visitedProvinceList.includes(site)) return "checked"
+                return ""
+            default:
+                return ""
         }
     }
-    // update user progress
+
     const updateUserProgress = (checkedItem) => {
-        if(location.pathname === "/site" && user){
-            const docRef = doc(db, "users", user.uid)    
-            // To update progress
-            updateDoc(docRef, {
-                "unescoListProgress": checkedItem
-            });
+        if (user){
+            const docRef = doc(db, "users", user.uid)  
+            switch(location.pathname){
+                case "/site":
+                    updateDoc(docRef, {"unescoListProgress": checkedItem});
+                    break;
+                case "/southeast-asia":
+                    updateDoc(docRef, {"seaUnescoProgress": checkedItem})
+                    break;
+                case "/province-list":
+                    updateDoc(docRef, {"provinceListProgress": checkedItem})
+                    break;
+                default:
+                    throw new Error("site path does not exist")
+            }
             console.log("user logged in, new data added to unesco list!");
         }
-        if(location.pathname === "/province-list" && user){
-            const docRef = doc(db, "users", user.uid)    
-            // To update progress
-            updateDoc(docRef, {
-                "provinceListProgress": checkedItem
-            });
-            console.log("user logged in, new data added to province list!");
-        }
-
+        else console.log("user not logged in")
     }
 
     return (

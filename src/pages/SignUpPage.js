@@ -40,6 +40,7 @@ function SignUpPage() {
                 timestamp: new Date(),
                 unescoListProgress: [],
                 provinceListProgress: [],
+                seaUnescoProgress: [],
             }
             setDoc(doc(db, "users", user.uid), newUser);
             toast("Sign Up Successful!")

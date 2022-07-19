@@ -7,7 +7,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import { toast } from 'react-toastify'
 
 function NavBar() {
-    const {setVisitedSite, setProvinceSite, setSelectedProvince} = useSiteContext()
+    const {setChinaVisitedSite, setProvinceSite, setSelectedProvince} = useSiteContext()
 
     const {dispatch, user} = useAuthContext()
 
@@ -21,7 +21,7 @@ function NavBar() {
             dispatch({type: "LOGOUT", payload: null})
             setSelectedProvince("All Province / Region")
             setProvinceSite(unescoSiteData.map(site => site))
-            setVisitedSite([])
+            setChinaVisitedSite([])
             toast.success("Log Out Successful!")
             navigate('/sign-in')
 
